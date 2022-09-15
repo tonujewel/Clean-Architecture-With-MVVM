@@ -18,7 +18,7 @@ class Routes {
   static const String storeDetailsRoute = "/storedetails";
 }
 
-class RouteManager {
+class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.splashRoute:
