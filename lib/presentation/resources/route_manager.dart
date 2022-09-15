@@ -3,6 +3,7 @@ import 'package:clean_architecture_with_mvvm/presentation/login/login_view.dart'
 import 'package:clean_architecture_with_mvvm/presentation/main/main_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/on_borading/onboarding_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view.dart';
+import 'package:clean_architecture_with_mvvm/presentation/resources/string_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/splash/splash_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/store_details/store_details_view.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +43,9 @@ class RouteManager {
   static Route<dynamic> undefineRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
-        appBar: AppBar(title: const Text("No Route found")),
-        body: const Center(
-          child: Text("No Route found"),
+        appBar: AppBar(title: Text(AppString.noRouteFound)),
+        body: Center(
+          child: Text(AppString.noRouteFound),
         ),
       ),
     );
