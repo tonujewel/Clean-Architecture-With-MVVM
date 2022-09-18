@@ -37,7 +37,7 @@ class User {
 }
 
 class Authentication {
-  User user;
+  User? user;
 
   Authentication(this.user);
 }

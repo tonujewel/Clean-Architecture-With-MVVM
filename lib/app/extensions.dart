@@ -1,8 +1,10 @@
 // extension on string
+import '../data/mapper/mapper.dart';
+
 extension NonNullString on String? {
   String orEmpty() {
     if (this == null) {
-      return "";
+      return EMPTY;
     } else {
       return this!;
     }
@@ -13,7 +15,7 @@ extension NonNullString on String? {
 extension NonNullInteger on int? {
   int orEmpty() {
     if (this == null) {
-      return 0;
+      return ZERO;
     } else {
       return this!;
     }
@@ -24,7 +26,7 @@ extension NonNullInteger on int? {
 extension NonNullDouble on double? {
   double orEmpty() {
     if (this == null) {
-      return 0.0;
+      return DOUBLE_ZERO;
     } else {
       return this!;
     }
