@@ -11,7 +11,6 @@ const ZERO = 0;
 // ignore: constant_identifier_names
 const DOUBLE_ZERO = 0.0;
 
-
 //....... USER ...........
 extension UserResponseMapper on UserResponse? {
   User toDomain() {
@@ -32,14 +31,10 @@ extension UserResponseMapper on UserResponse? {
   }
 }
 
-
-
 //....... AUTHENTICATION ...........
 
-extension AuthenticationMapper on AuthenticationResponse?{
-  Authentication toDomain(){
+extension AuthenticationMapper on AuthenticationResponse? {
+  Authentication toDomain() {
     return Authentication(this?.userResponse?.toDomain());
   }
 }
-
-
