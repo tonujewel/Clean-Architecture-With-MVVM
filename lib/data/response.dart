@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+part 'response.g.dart';
 
 @JsonSerializable()
 class BaseResponse {
@@ -11,33 +12,63 @@ class BaseResponse {
 @JsonSerializable()
 class UserResponse {
   @JsonKey(name: "id")
-  int? id;
+  final int? id;
   @JsonKey(name: "first_name")
-  String? firstName;
+  final String? firstName;
   @JsonKey(name: "last_name")
-  String? lastName;
+  final String? lastName;
   @JsonKey(name: "role")
-  String? role;
+  final String? role;
   @JsonKey(name: "email")
-  String? email;
+  final String? email;
   @JsonKey(name: "phone")
-  String? phone;
+  final String? phone;
   @JsonKey(name: "balance")
-  String? balance;
+  final String? balance;
   @JsonKey(name: "currency_code")
-  String? currencyCode;
+  final String? currencyCode;
   @JsonKey(name: "lat")
-  double? lat;
+  final double? lat;
   @JsonKey(name: "lng")
-  double? lng;
+  final double? lng;
   @JsonKey(name: "image")
-  String? image;
+  final String? image;
   @JsonKey(name: "token")
-  String? token;
+  final String? token;
+
+  UserResponse(
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.role,
+    this.email,
+    this.phone,
+    this.balance,
+    this.currencyCode,
+    this.lat,
+    this.lng,
+    this.image,
+    this.token,
+  );
+  // from json
+  factory UserResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() => _$UserResponseToJson(this);
 }
 
 @JsonSerializable()
 class AuthenticationResponse extends BaseResponse {
   @JsonKey(name: "data")
   UserResponse? userResponse;
+
+  AuthenticationResponse(this.userResponse);
+
+  // from json
+  factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthenticationResponseFromJson(json);
+
+  // to json
+  Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }
