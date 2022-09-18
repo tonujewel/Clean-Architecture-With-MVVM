@@ -5,7 +5,7 @@ abstract class NetworkInfo {
 }
 
 class NetworkInfoImplementer extends NetworkInfo {
-  DataConnectionChecker _dataConnectionChecker;
+ final DataConnectionChecker _dataConnectionChecker;
 
   NetworkInfoImplementer(this._dataConnectionChecker);
   @override
