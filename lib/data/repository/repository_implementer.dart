@@ -28,12 +28,12 @@ class RepositoryImpl extends Repository {
       } else {
         //  do error business logic
         // return left
-        return Left(Failure(false, response.message ?? "Error from Api"));
+        return Left(Failure(201, response.message ?? "Error from Api"));
       }
     } else {
       // internet connection failed
       // return left for the error
-      return Left(Failure(false, "Check your internet connection"));
+      return Left(Failure(501, "Check your internet connection"));
     }
   }
 }
