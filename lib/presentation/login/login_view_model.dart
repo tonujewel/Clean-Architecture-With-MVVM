@@ -1,11 +1,19 @@
+import 'dart:async';
+
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInput, LoginViewModelOutput {
-  // ................ input ................
+  StreamController _userNameStreamController =
+      StreamController<String>.broadcast();
+  StreamController _passwordStreamController =
+      StreamController<String>.broadcast();
+
+  // ................ INPUT ................
   @override
   void dispose() {
-    // TODO: implement dispose
+    _passwordStreamController.close();
+    _userNameStreamController.close();
   }
 
   @override
@@ -14,12 +22,10 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  // TODO: implement inputPassword
-  Sink get inputPassword => throw UnimplementedError();
+  Sink get inputPassword => _passwordStreamController.sink;
 
   @override
-  // TODO: implement inputUsername
-  Sink get inputUsername => throw UnimplementedError();
+  Sink get inputUsername => _userNameStreamController.sink;
 
   @override
   login() {
@@ -28,7 +34,7 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  serPasswrd(String password) {
+  setPasswrd(String password) {
     // TODO: implement serPasswrd
     throw UnimplementedError();
   }
@@ -39,21 +45,31 @@ class LoginViewModel extends BaseViewModel
     throw UnimplementedError();
   }
 
-  //................ output...................
+  //................ OUTPUT...................
 
   @override
-  // TODO: implement outputIsPasswordValid
-  Stream<bool> get outputIsPasswordValid => throw UnimplementedError();
+  Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream
+      .map((password) => _isValidPassword(password));
 
   @override
-  // TODO: implement outputIsUsernameValid
-  Stream<bool> get outputIsUsernameValid => throw UnimplementedError();
+  Stream<bool> get outputIsUsernameValid => _userNameStreamController.stream
+      .map((username) => _isValidUserName(username));
+
+  //................ PRIVATE...................
+
+  bool _isValidPassword(String password) {
+    return password.isNotEmpty;
+  }
+
+  bool _isValidUserName(String username) {
+    return username.isNotEmpty;
+  }
 }
 
 abstract class LoginViewModelInput {
   // function
   setUserName(String userName);
-  serPasswrd(String password);
+  setPasswrd(String password);
   login();
 
   // sink
