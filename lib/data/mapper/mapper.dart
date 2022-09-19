@@ -2,7 +2,7 @@
 
 import 'package:clean_architecture_with_mvvm/app/extensions.dart';
 import 'package:clean_architecture_with_mvvm/data/responses/response.dart';
-import 'package:clean_architecture_with_mvvm/domain/model.dart';
+import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 
 // ignore: constant_identifier_names
 const EMPTY = "";
