@@ -4,9 +4,9 @@ import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_v
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInput, LoginViewModelOutput {
-  StreamController _userNameStreamController =
+  final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
-  StreamController _passwordStreamController =
+  final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
 
   // ................ INPUT ................
@@ -35,14 +35,12 @@ class LoginViewModel extends BaseViewModel
 
   @override
   setPasswrd(String password) {
-    // TODO: implement serPasswrd
-    throw UnimplementedError();
+    inputPassword.add(password);
   }
 
   @override
   setUserName(String userName) {
-    // TODO: implement setUserName
-    throw UnimplementedError();
+    inputUsername.add(userName);
   }
 
   //................ OUTPUT...................
