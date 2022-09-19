@@ -14,7 +14,6 @@ enum DataSource {
   RECIEVE_TIMEOUT,
   SEND_TIMEOUT,
   CACHE_ERROR,
-  NI_INTERNET_CONNECTION,
   RECEIVE_TIMEOUT,
   NO_INTERNET_CONNECTION,
   DEFAULT
@@ -150,4 +149,9 @@ class ResponseMessage {
   static const String CACHE_ERROR = " Cache error , try again later ";
   static const String NO_INTERNET_CONNECTION =
       " Please check your internet connection ";
+}
+
+class ApiInternalStatus {
+  static const bool SUCCESS = true;
+  static const bool FAILURE = false;
 }
