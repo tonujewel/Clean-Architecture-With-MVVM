@@ -24,6 +24,6 @@ class AppString {
   static String password = "Password";
   static String passwordError = "Password in wrong";
   static String login = "login";
-  static String forgotPassword = "Forgot Password";
+  static String forgotPassword = "Forgot Password?";
   static String registerText = "Not a member? Sign up";
 }
