@@ -28,7 +28,7 @@ class _LoginViewState extends State<LoginView> {
         () => _viewModel.setUserName(_usernameTextController.text));
 
     _passwordTextController
-        .addListener(() => _viewModel.setPasswrd(_passwordTextController.text));
+        .addListener(() => _viewModel.setPassword(_passwordTextController.text));
   }
 
   @override
@@ -66,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.only(
                       left: AppPadding.p28, right: AppPadding.p28),
                   child: StreamBuilder<bool>(
-                      stream: _viewModel.outputIsUsernameValid,
+                      stream: _viewModel.outputIsUserNameValid,
                       builder: (context, snapshot) {
                         return TextFormField(
                           keyboardType: TextInputType.emailAddress,
@@ -106,14 +106,16 @@ class _LoginViewState extends State<LoginView> {
                   padding: const EdgeInsets.only(
                       left: AppPadding.p28, right: AppPadding.p28),
                   child: StreamBuilder<bool>(
-                    stream: _viewModel.outputIsAllInputValid,
+                    stream: _viewModel.outputIsAllInputsValid,
                     builder: (context, snapshot) {
                       return SizedBox(
                         width: double.infinity,
                         height: AppSize.s40,
                         child: ElevatedButton(
                             onPressed: (snapshot.data ?? false)
-                                ? () => _viewModel.login()
+                                ? () {
+                                    _viewModel.login();
+                                  }
                                 : null,
                             child: Text(AppString.login)),
                       );
