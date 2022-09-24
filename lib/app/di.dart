@@ -1,0 +1,43 @@
+import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
+import 'package:clean_architecture_with_mvvm/data/date_sources/remote_data_sources.dart';
+import 'package:clean_architecture_with_mvvm/data/network/app_api.dart';
+import 'package:clean_architecture_with_mvvm/data/network/dio_factory.dart';
+import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';
+import 'package:clean_architecture_with_mvvm/data/repository/repository_implementer.dart';
+import 'package:clean_architecture_with_mvvm/domain/repositories/repository.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+final instance = GetIt.instance;
+
+Future<void> initAppModule() async {
+  final sharePreferences = await SharedPreferences.getInstance();
+
+  // shared preference instance
+  instance.registerLazySingleton<SharedPreferences>(() => sharePreferences);
+
+  // App Preferences instance
+  instance
+      .registerLazySingleton<AppPreferences>(() => AppPreferences(instance()));
+
+  // Network info instance
+
+  instance.registerLazySingleton<NetworkInfo>(
+      () => NetworkInfoImplementer(DataConnectionChecker()));
+
+  // Dio facroty instance
+  instance.registerLazySingleton<DioFactory>(() => DioFactory(instance()));
+
+  // App service client instance
+  final dio = await instance<DioFactory>().getDio();
+  instance.registerLazySingleton<AppServiceClient>(() => AppServiceClient(dio));
+
+  // remote data source
+  instance.registerLazySingleton<RemoteDataSource>(
+      () => RemoteDataSourceImplementer(instance()));
+
+  // repository
+  instance.registerLazySingleton<Repository>(
+      () => RepositoryImpl(instance(), instance()));
+}
