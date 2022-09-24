@@ -1,3 +1,4 @@
+import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/login/login_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/color_manager.dart';
@@ -14,8 +15,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel =
-      LoginViewModel(null); // TODO: PASS HERE LOGIN USECASE
+   LoginViewModel _viewModel = instance<LoginViewModel>();
 
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
@@ -26,8 +26,8 @@ class _LoginViewState extends State<LoginView> {
     _usernameTextController.addListener(
         () => _viewModel.setUserName(_usernameTextController.text));
 
-    _passwordTextController
-        .addListener(() => _viewModel.setPassword(_passwordTextController.text));
+    _passwordTextController.addListener(
+        () => _viewModel.setPassword(_passwordTextController.text));
   }
 
   @override
