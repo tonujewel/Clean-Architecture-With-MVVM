@@ -1,4 +1,7 @@
 // extension on string
+import 'package:analyzer/dart/element/type.dart';
+import 'package:flutter/material.dart';
+
 import '../data/mapper/mapper.dart';
 
 extension NonNullString on String? {
@@ -43,3 +46,4 @@ extension NonNullBoolean on bool? {
     }
   }
 }
+

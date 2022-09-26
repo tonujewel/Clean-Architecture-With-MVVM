@@ -27,10 +27,10 @@ enum StateRendererType {
 
 class StateRenderer extends StatelessWidget {
   final StateRendererType stateRendererType;
-  Failure failure;
+  
   String message;
   String title;
-  Function ?retryAction;
+  Function? retryAction;
 
   StateRenderer(
       {Key? key,
@@ -41,7 +41,7 @@ class StateRenderer extends StatelessWidget {
       required this.retryAction})
       : message = message ?? AppString.loading,
         title = title ?? EMPTY,
-        failure = failure ?? DefaultFailure(),
+    
         super(key: key);
 
   @override
@@ -52,69 +52,95 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.POPUP_LOADING_STATE:
-        return _getPopUpDialog(context,[_getAnimatedImage(JsonManager.loading)]);
+        return _getPopUpDialog(
+            context, [_getAnimatedImage(JsonManager.loading)]);
       case StateRendererType.PUPUP_ERROR_STATE:
-         return _getPopUpDialog(context,[_getAnimatedImage(JsonManager.error),_getMessage(failure.message),    _getRetryButton(AppString.ok,context),]);
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(JsonManager.error),
+          _getMessage(message),
+          _getRetryButton(AppString.ok, context),
+        ]);
       case StateRendererType.FULL_SCREEN_LOADING_STATE:
-      return _getItemsInColumn([_getAnimatedImage(JsonManager.loading),_getMessage(message)]);
-   
+        return _getItemsInColumn(
+            [_getAnimatedImage(JsonManager.loading), _getMessage(message)]);
       case StateRendererType.FULL_SCREEN_EMPTY_STATE:
-           return _getItemsInColumn([_getAnimatedImage(JsonManager.empty),_getMessage(message)]);
+        return _getItemsInColumn(
+            [_getAnimatedImage(JsonManager.empty), _getMessage(message)]);
       case StateRendererType.FULL_SCREEN_ERROR_STATE:
-         return _getItemsInColumn([_getAnimatedImage(JsonManager.error),
-         _getMessage(failure.message),
-         _getRetryButton(AppString.retryAgain,context),
-         ]);
+        return _getItemsInColumn([
+          _getAnimatedImage(JsonManager.error),
+          _getMessage(message),
+          _getRetryButton(AppString.retryAgain, context),
+        ]);
       case StateRendererType.CONTENT_SCREEN_STATE:
         return Container();
       default:
-       return Container();
+        return Container();
     }
   }
 
-
-  Widget _getPopUpDialog(BuildContext context,List<Widget>childres){
+  Widget _getPopUpDialog(BuildContext context, List<Widget> childres) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadiusDirectional.circular(AppSize.s14)),
-      elevation: AppSize.s1_5,
-      backgroundColor: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(color: ColorManager.white,shape: BoxShape.rectangle,borderRadius: BorderRadius.circular(AppSize.s14),
-        boxShadow:const [BoxShadow(color: Colors.black26,blurRadius: AppSize.s12,offset: Offset(AppSize.s0,AppSize.s12))]),
-     child: _getDialogContect(context,childres),
-     
-      ));
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusDirectional.circular(AppSize.s14)),
+        elevation: AppSize.s1_5,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+              color: ColorManager.white,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(AppSize.s14),
+              boxShadow: const [
+                BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: AppSize.s12,
+                    offset: Offset(AppSize.s0, AppSize.s12))
+              ]),
+          child: _getDialogContect(context, childres),
+        ));
   }
 
-  Widget _getDialogContect(BuildContext context,List<Widget>children){
-    return Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,mainAxisSize: MainAxisSize.min,children: children,);
+  Widget _getDialogContect(BuildContext context, List<Widget> children) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: children,
+    );
   }
 
   Widget _getAnimatedImage(String animationName) {
     return SizedBox(
       height: AppSize.s100,
       width: AppSize.s100,
-      child:Lottie.asset(animationName) , // json image
+      child: Lottie.asset(animationName), // json image
     );
   }
+
   Widget _getMessage(String message) {
-    return Text(message,style: getMediumTextStyle(color: ColorManager.black,fontSize: FontSize.s16),);
+    return Text(
+      message,
+      style:
+          getMediumTextStyle(color: ColorManager.black, fontSize: FontSize.s16),
+    );
   }
 
-  Widget _getRetryButton(String buttonText,BuildContext context){
+  Widget _getRetryButton(String buttonText, BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p18),
         child: SizedBox(
           height: AppSize.s180,
-          child: ElevatedButton(onPressed: (){
-          
-            if (stateRendererType==StateRendererType.FULL_SCREEN_ERROR_STATE) {
-              retryAction?.call();
-            }else{
-              Navigator.of(context).pop();
-            }
-          }, child: Text(buttonText)),
+          child: ElevatedButton(
+              onPressed: () {
+                if (stateRendererType ==
+                    StateRendererType.FULL_SCREEN_ERROR_STATE) {
+                  retryAction?.call();
+                } else {
+                  Navigator.of(context).pop();
+                }
+              },
+              child: Text(buttonText)),
         ),
       ),
     );
