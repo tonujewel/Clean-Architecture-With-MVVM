@@ -15,7 +15,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-   LoginViewModel _viewModel = instance<LoginViewModel>();
+  final LoginViewModel _viewModel =
+      instance<LoginViewModel>(); // Dependency Injection
 
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
