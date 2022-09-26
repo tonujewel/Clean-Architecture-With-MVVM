@@ -7,7 +7,7 @@ import 'package:clean_architecture_with_mvvm/data/repository/repository_implemen
 import 'package:clean_architecture_with_mvvm/domain/repositories/repository.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/login_use_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/login/login_view_model.dart';
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -26,4 +26,7 @@ class AppString {
   static String login = "login";
   static String forgotPassword = "Forgot Password?";
   static String registerText = "Not a member? Sign up";
+
+   //.............. COMMON ...............//
+  static String loading = "Loading";
 }

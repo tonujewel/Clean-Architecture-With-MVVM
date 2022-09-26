@@ -5,20 +5,19 @@ import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_v
 import '../../domain/use_case/login_use_case.dart';
 import '../common/freezed_data_classes.dart';
 
-
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
-  StreamController _userNameStreamController =
+  final StreamController _userNameStreamController =
       StreamController<String>.broadcast();
-  StreamController _passwordStreamController =
+  final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
 
-  StreamController _isAllInputsValidStreamController =
+  final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
 
-  LoginUseCase _loginUseCase; 
+  LoginUseCase _loginUseCase;
 
   LoginViewModel(this._loginUseCase);
 
@@ -31,9 +30,7 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  void start() {
-    // TODO: implement start
-  }
+  void start() {}
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
@@ -51,11 +48,11 @@ class LoginViewModel extends BaseViewModel
         .fold(
             (failure) => {
                   // left -> failure
-                  print(failure.message)
+                  print("failure.message ${failure.message}")
                 },
             (data) => {
                   // right -> success (data)
-                  print(data.user?.firstName)
+                  print("tokenData ${data.user?.token}")
                 });
   }
 
