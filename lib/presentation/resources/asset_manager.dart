@@ -12,3 +12,12 @@ class AssetManager {
   static const String rightArrowIc = "$imagePath/right_arrow_ic.svg";
   static const String solidCircleIc = "$imagePath/solid_circle_ic.svg";
 }
+
+
+class JsonManager{
+    static const String empty = "assets/json/empty.json";
+    static const String error = "assets/json/error.json";
+    static const String loading = "assets/json/loading.json";
+    static const String success = "assets/json/success.json";
+
+}

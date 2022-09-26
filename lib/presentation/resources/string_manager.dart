@@ -29,4 +29,7 @@ class AppString {
 
    //.............. COMMON ...............//
   static String loading = "Loading";
+  static String retryAgain = "Retry Again";
+  static String ok = "OK";
+
 }
