@@ -27,7 +27,7 @@ enum StateRendererType {
 
 class StateRenderer extends StatelessWidget {
   final StateRendererType stateRendererType;
-  
+
   String message;
   String title;
   Function? retryAction;
@@ -41,7 +41,6 @@ class StateRenderer extends StatelessWidget {
       required this.retryAction})
       : message = message ?? AppString.loading,
         title = title ?? EMPTY,
-    
         super(key: key);
 
   @override
@@ -118,10 +117,13 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getMessage(String message) {
-    return Text(
-      message,
-      style:
-          getMediumTextStyle(color: ColorManager.black, fontSize: FontSize.s16),
+    return Padding(
+      padding: const EdgeInsets.only(top: AppPadding.p10),
+      child: Text(
+        message,
+        style: getMediumTextStyle(
+            color: ColorManager.black, fontSize: FontSize.s16),
+      ),
     );
   }
 
@@ -130,7 +132,7 @@ class StateRenderer extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p18),
         child: SizedBox(
-          height: AppSize.s180,
+          width: AppSize.s180,
           child: ElevatedButton(
               onPressed: () {
                 if (stateRendererType ==

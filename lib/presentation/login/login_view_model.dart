@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
+import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/state_renderer.dart';
 
 import '../../domain/use_case/login_use_case.dart';
 import '../common/freezed_data_classes.dart';
@@ -30,7 +32,9 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  void start() {}
+  void start() {
+    inputState.add(ContentState());
+  }
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
@@ -43,16 +47,19 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
     (await _loginUseCase.execute(
             LoginUseCaseInput(loginObject.username, loginObject.password)))
-        .fold(
-            (failure) => {
-                  // left -> failure
-                  print("failure.message ${failure.message}")
-                },
+        .fold((failure) {
+      // left -> failure
+      print("object${failure.message}");
+      inputState.add(
+          ErrorState(StateRendererType.PUPUP_ERROR_STATE, failure.message));
+    },
             (data) => {
                   // right -> success (data)
-                  print("tokenData ${data.user?.token}")
+                  inputState.add(ContentState())
                 });
   }
 

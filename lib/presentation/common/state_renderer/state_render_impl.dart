@@ -80,6 +80,7 @@ extension FlowStateExtension on FlowState {
       case ErrorState:
         {
           dismisDialog(context);
+          
           // pop up loading
           if (getStateRendererType() == StateRendererType.PUPUP_ERROR_STATE) {
             showPopUp(context, getStateRendererType(), getMessage());
@@ -126,7 +127,7 @@ extension FlowStateExtension on FlowState {
         context: context,
         builder: (BuildContext contex) {
           return StateRenderer(
-              stateRendererType: stateRendererType, retryAction: () {});
+              stateRendererType: stateRendererType,message: message, retryAction: () {});
         }));
   }
 }
