@@ -1,4 +1,4 @@
-import 'package:clean_architecture_with_mvvm/data/date_sources/remote_data_sources.dart';
+import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sources.dart';
 import 'package:clean_architecture_with_mvvm/data/mapper/mapper.dart';
 import 'package:clean_architecture_with_mvvm/data/network/error_handler.dart';
 import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';

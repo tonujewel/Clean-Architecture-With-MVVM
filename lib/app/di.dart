@@ -1,5 +1,5 @@
 import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
-import 'package:clean_architecture_with_mvvm/data/date_sources/remote_data_sources.dart';
+import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sources.dart';
 import 'package:clean_architecture_with_mvvm/data/network/app_api.dart';
 import 'package:clean_architecture_with_mvvm/data/network/dio_factory.dart';
 import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';

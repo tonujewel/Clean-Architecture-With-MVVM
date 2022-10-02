@@ -1,3 +1,4 @@
+import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/state_render_impl.dart';
 import 'package:clean_architecture_with_mvvm/presentation/login/login_view_model.dart';
@@ -20,6 +21,8 @@ class _LoginViewState extends State<LoginView> {
   final LoginViewModel _viewModel =
       instance<LoginViewModel>(); // Dependency Injection
 
+  final AppPreferences _appPreferences = instance<AppPreferences>();
+
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
 
@@ -35,6 +38,7 @@ class _LoginViewState extends State<LoginView> {
     _viewModel.isLoginSuccessfullyStreamController.stream
         .listen((isLoginSuccess) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _appPreferences.setIsUserLoggedIn();
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
       });
     });

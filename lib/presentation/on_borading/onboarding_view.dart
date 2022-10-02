@@ -1,3 +1,5 @@
+import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
+import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/on_borading/on_boarding_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/color_manager.dart';
@@ -21,8 +23,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController(initialPage: 0);
 
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final AppPreferences _preferences = instance<AppPreferences>();
 
   _bind() {
+    _preferences.setOnBoardingScreenViewed();
     _viewModel.start();
   }
 
@@ -68,7 +72,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               _viewModel.onPageChanges(index);
             },
             itemBuilder: (context, index) {
-              return OnBoardingPage(sliderObject: sliderViewObject.sliderObject);
+              return OnBoardingPage(
+                  sliderObject: sliderViewObject.sliderObject);
             }),
         bottomSheet: Container(
           color: ColorManager.white,
@@ -128,7 +133,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               for (int i = 0; i < sliderViewObject.slideNumber; i++)
                 Padding(
                   padding: const EdgeInsets.all(AppPadding.p8),
-                  child: _getProperCircle(i,sliderViewObject.currentIndex),
+                  child: _getProperCircle(i, sliderViewObject.currentIndex),
                 )
             ],
           ),
