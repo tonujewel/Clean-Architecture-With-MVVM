@@ -1,4 +1,8 @@
 class AppString {
+  //.............. COMMON ...............//
+  static String loading = "Loading";
+  static String retryAgain = "Retry Again";
+  static String ok = "OK";
   static String noRouteFound = "No Route Found";
 
   //.............. ON BOARDING SCREEN ...............//
@@ -27,9 +31,9 @@ class AppString {
   static String forgotPassword = "Forgot Password?";
   static String registerText = "Not a member? Sign up";
 
-   //.............. COMMON ...............//
-  static String loading = "Loading";
-  static String retryAgain = "Retry Again";
-  static String ok = "OK";
+  //.............. FORGOT SCREEN ...............//
 
+  static String email = "Email";
+  static String emailError = "Invalid email address";
+  static String sendVarificationCode = "Send verification code";
 }

@@ -38,3 +38,10 @@ extension AuthenticationMapper on AuthenticationResponse? {
     return Authentication(this?.userResponse?.toDomain());
   }
 }
+//....... Base response ...........
+
+extension BaseResponseMapper on BaseResponse? {
+  Messages toDomain() {
+    return Messages(this?.message??EMPTY);
+  }
+}

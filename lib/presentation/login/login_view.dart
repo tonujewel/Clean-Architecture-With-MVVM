@@ -18,8 +18,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel =
-      instance<LoginViewModel>(); // Dependency Injection
+  final LoginViewModel _viewModel = instance<LoginViewModel>(); // Dependency Injection
 
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
@@ -74,6 +73,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _getContectWidget() {
+    
     return Container(
       padding: const EdgeInsets.only(
         top: AppPadding.p100,

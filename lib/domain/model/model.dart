@@ -42,6 +42,12 @@ class Authentication {
   Authentication(this.user);
 }
 
+class Messages {
+  String message;
+
+  Messages(this.message);
+}
+
 class DeviceInfo {
   String name;
   String identifier;

@@ -29,10 +29,39 @@ class RepositoryImpl extends Repository {
         } else {
           //  do error business logic
           // return left
-          return Left(Failure(409, response.message ?? ResponseMessage.DEFAULT));
+          return Left(
+              Failure(409, response.message ?? ResponseMessage.DEFAULT));
         }
       } catch (error) {
-        // Error handle 
+        // Error handle
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // internet connection failed
+      // return left for the error
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Messages>> forgotPassword(
+      ForgotRequst forgotRequst) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        // internet connection is okay
+        final response = await _remoteDataSource.forgotPassword(forgotRequst);
+        if (response.success == ApiInternalStatus.SUCCESS) {
+          // success
+          // then return right
+          return Right(response.toDomain());
+        } else {
+          //  do error business logic
+          // return left
+          return Left(
+              Failure(409, response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        // Error handle
         return Left(ErrorHandler.handle(error).failure);
       }
     } else {

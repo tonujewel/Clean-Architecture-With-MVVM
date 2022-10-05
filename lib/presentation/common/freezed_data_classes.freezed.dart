@@ -145,3 +145,117 @@ abstract class _LoginObject implements LoginObject {
   _$$_LoginObjectCopyWith<_$_LoginObject> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$ForgotObject {
+  String get email => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ForgotObjectCopyWith<ForgotObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ForgotObjectCopyWith<$Res> {
+  factory $ForgotObjectCopyWith(
+          ForgotObject value, $Res Function(ForgotObject) then) =
+      _$ForgotObjectCopyWithImpl<$Res>;
+  $Res call({String email});
+}
+
+/// @nodoc
+class _$ForgotObjectCopyWithImpl<$Res> implements $ForgotObjectCopyWith<$Res> {
+  _$ForgotObjectCopyWithImpl(this._value, this._then);
+
+  final ForgotObject _value;
+  // ignore: unused_field
+  final $Res Function(ForgotObject) _then;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+  }) {
+    return _then(_value.copyWith(
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_ForgotObjectCopyWith<$Res>
+    implements $ForgotObjectCopyWith<$Res> {
+  factory _$$_ForgotObjectCopyWith(
+          _$_ForgotObject value, $Res Function(_$_ForgotObject) then) =
+      __$$_ForgotObjectCopyWithImpl<$Res>;
+  @override
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$_ForgotObjectCopyWithImpl<$Res>
+    extends _$ForgotObjectCopyWithImpl<$Res>
+    implements _$$_ForgotObjectCopyWith<$Res> {
+  __$$_ForgotObjectCopyWithImpl(
+      _$_ForgotObject _value, $Res Function(_$_ForgotObject) _then)
+      : super(_value, (v) => _then(v as _$_ForgotObject));
+
+  @override
+  _$_ForgotObject get _value => super._value as _$_ForgotObject;
+
+  @override
+  $Res call({
+    Object? email = freezed,
+  }) {
+    return _then(_$_ForgotObject(
+      email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ForgotObject implements _ForgotObject {
+  _$_ForgotObject(this.email);
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'ForgotObject(email: $email)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ForgotObject &&
+            const DeepCollectionEquality().equals(other.email, email));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(email));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_ForgotObjectCopyWith<_$_ForgotObject> get copyWith =>
+      __$$_ForgotObjectCopyWithImpl<_$_ForgotObject>(this, _$identity);
+}
+
+abstract class _ForgotObject implements ForgotObject {
+  factory _ForgotObject(final String email) = _$_ForgotObject;
+
+  @override
+  String get email;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ForgotObjectCopyWith<_$_ForgotObject> get copyWith =>
+      throw _privateConstructorUsedError;
+}
