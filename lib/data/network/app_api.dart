@@ -16,4 +16,13 @@ abstract class AppServiceClient {
 
   @POST("authentication/forget-password")
   Future<BaseResponse> forgotPassword(@Field("email") String email);
+
+// TODO : CHANGE URL
+  @POST("register")
+  Future<AuthenticationResponse> register(
+    @Field("first_name") String firstName,
+    @Field("last_name") String lastName,
+    @Field("email") String email,
+    @Field("password") String password,
+  );
 }

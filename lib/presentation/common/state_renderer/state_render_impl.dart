@@ -38,6 +38,20 @@ class ErrorState extends FlowState {
   StateRendererType getStateRendererType() => stateRendererType;
 }
 
+// SUCCESS STATE
+class SuccessState extends FlowState {
+  StateRendererType stateRendererType;
+  String message;
+
+  SuccessState(this.stateRendererType, this.message);
+
+  @override
+  String getMessage() => message;
+
+  @override
+  StateRendererType getStateRendererType() => stateRendererType;
+}
+
 // CONTENT STATE
 class ContentState extends FlowState {
   @override
@@ -83,6 +97,22 @@ extension FlowStateExtension on FlowState {
           
           // pop up loading
           if (getStateRendererType() == StateRendererType.PUPUP_ERROR_STATE) {
+            showPopUp(context, getStateRendererType(), getMessage());
+            return contentScreenWidget;
+          } else {
+            // full screen loading
+            return StateRenderer(
+                stateRendererType: getStateRendererType(),
+                message: getMessage(),
+                retryAction: retryAction);
+          }
+        }
+      case SuccessState:
+        {
+          dismisDialog(context);
+          
+          // pop up loading
+          if (getStateRendererType() == StateRendererType.PUPUP_SUCCESS_STATE) {
             showPopUp(context, getStateRendererType(), getMessage());
             return contentScreenWidget;
           } else {

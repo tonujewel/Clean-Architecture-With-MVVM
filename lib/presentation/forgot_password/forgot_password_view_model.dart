@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:clean_architecture_with_mvvm/app/extensions.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/forgot_user_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
@@ -16,7 +17,7 @@ class ForgotPasswordViewModel extends BaseViewModel
   final ForgotUseCase _useCase;
   ForgotPasswordViewModel(this._useCase);
 
-   StreamController isForgotSuccessfullyStreamController =
+  StreamController isForgotSuccessfullyStreamController =
       StreamController<bool>();
 
   @override
@@ -41,7 +42,9 @@ class ForgotPasswordViewModel extends BaseViewModel
       inputState
           .add(ErrorState(StateRendererType.PUPUP_ERROR_STATE, failed.message));
     }, (data) {
-      inputState.add(ContentState());
+      inputState.add(
+        SuccessState(StateRendererType.PUPUP_SUCCESS_STATE, data.message),
+      );
       isForgotSuccessfullyStreamController.add(true);
     });
   }

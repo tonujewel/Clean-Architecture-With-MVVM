@@ -7,15 +7,13 @@ import 'package:clean_architecture_with_mvvm/presentation/resources/string_manag
 import 'package:clean_architecture_with_mvvm/presentation/resources/style_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:lottie/lottie.dart';
 
 enum StateRendererType {
 // POP UP
   POPUP_LOADING_STATE,
   PUPUP_ERROR_STATE,
+  PUPUP_SUCCESS_STATE,
 
   // FULL SCREEN
   FULL_SCREEN_LOADING_STATE,
@@ -56,6 +54,12 @@ class StateRenderer extends StatelessWidget {
       case StateRendererType.PUPUP_ERROR_STATE:
         return _getPopUpDialog(context, [
           _getAnimatedImage(JsonManager.error),
+          _getMessage(message),
+          _getRetryButton(AppString.ok, context),
+        ]);
+      case StateRendererType.PUPUP_SUCCESS_STATE:
+        return _getPopUpDialog(context, [
+          _getAnimatedImage(JsonManager.success),
           _getMessage(message),
           _getRetryButton(AppString.ok, context),
         ]);
@@ -118,7 +122,8 @@ class StateRenderer extends StatelessWidget {
 
   Widget _getMessage(String message) {
     return Padding(
-      padding: const EdgeInsets.only(top: AppPadding.p10),
+      padding: const EdgeInsets.only(
+          top: AppPadding.p10, left: AppPadding.p10, right: AppPadding.p10),
       child: Text(
         message,
         style: getMediumTextStyle(

@@ -7,6 +7,8 @@ class BaseResponse {
   bool? success;
   @JsonKey(name: "message")
   String? message;
+
+  static fromJson(Map<String, dynamic> map) {}
 }
 
 @JsonSerializable()

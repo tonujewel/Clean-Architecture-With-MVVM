@@ -9,6 +9,8 @@ import 'package:clean_architecture_with_mvvm/presentation/splash/splash_view.dar
 import 'package:clean_architecture_with_mvvm/presentation/store_details/store_details_view.dart';
 import 'package:flutter/material.dart';
 
+import '../forgot_otp_screen/forgot_otp_screen.dart';
+
 class Routes {
   static const String splashRoute = "/";
   static const String onBoardingRoute = "/onboarding";
@@ -17,6 +19,7 @@ class Routes {
   static const String forgotPasswordRoute = "/forgotpassword";
   static const String mainRoute = "/main";
   static const String storeDetailsRoute = "/storedetails";
+  static const String forgetOtpScreenRoute = "/forgetotpscreen";
 }
 
 class RouteGenerator {
@@ -38,6 +41,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.storeDetailsRoute:
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
+      case Routes.forgetOtpScreenRoute:
+        return MaterialPageRoute(builder: (_) => const ForgetOtpScreen());
       default:
         return undefineRoute();
     }

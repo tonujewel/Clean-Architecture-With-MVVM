@@ -1,11 +1,11 @@
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/forgot_password/forgot_password_view_model.dart';
-import 'package:clean_architecture_with_mvvm/presentation/resources/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/asset_manager.dart';
 import '../resources/color_manager.dart';
+import '../resources/route_manager.dart';
 import '../resources/string_manager.dart';
 import '../resources/values_manager.dart';
 
@@ -30,9 +30,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
     // is api call success
     _viewModel.isForgotSuccessfullyStreamController.stream
-        .listen((isLoginSuccess) {
+        .listen((isForgetSuccess) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-        Navigator.of(context).pushNamed(Routes.registerRoute);
+        Navigator.of(context).pushNamed(Routes.forgetOtpScreenRoute);
       });
     });
   }
