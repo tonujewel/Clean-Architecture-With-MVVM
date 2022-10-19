@@ -70,4 +70,32 @@ class RepositoryImpl extends Repository {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Authentication>> register(
+      RegisterRequest registerRequest) async {
+    if (await _networkInfo.isConnected) {
+       try {
+        // internet connection is okay
+        final response = await _remoteDataSource.reginster(registerRequest);
+        if (response.success == ApiInternalStatus.SUCCESS) {
+          // success
+          // then return right
+          return Right(response.toDomain());
+        } else {
+          //  do error business logic
+          // return left
+          return Left(
+              Failure(409, response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        // Error handle
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // internet connection failed
+      // return left for the error
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }
