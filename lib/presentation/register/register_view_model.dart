@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:clean_architecture_with_mvvm/app/functions.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/register_use_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
+import 'package:clean_architecture_with_mvvm/presentation/common/freezed_data_classes.dart';
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInput, RegisterViewModelOutput {
@@ -18,6 +19,7 @@ class RegisterViewModel extends BaseViewModel
       StreamController<String>.broadcast();
 
   RegisterUseCase _registerUseCase;
+  var registerViewObject = RegisterObject('', '', '', '');
   RegisterViewModel(this._registerUseCase);
 
   @override
@@ -102,9 +104,8 @@ class RegisterViewModel extends BaseViewModel
     return lastName.isNotEmpty;
   }
 
-
   bool _isPasswordValid(String password) {
-    return password.length >=8;
+    return password.length >= 8;
   }
 }
 
