@@ -107,10 +107,53 @@ class RegisterViewModel extends BaseViewModel
   bool _isPasswordValid(String password) {
     return password.length >= 8;
   }
+
+  @override
+  setFirstName(String name) {
+    if (_isFirstNameValid(name)) {
+      // update register object with first name
+      registerViewObject = registerViewObject.copyWith(firstName: name);
+    } else {
+      // reset user name value in register view object
+      registerViewObject = registerViewObject.copyWith(firstName: '');
+    }
+  }
+
+  @override
+  setLastName(String lastName) {
+    if (_isLastNameValid(lastName)) {
+      registerViewObject = registerViewObject.copyWith(lastName: lastName);
+    } else {
+      registerViewObject = registerViewObject.copyWith(lastName: '');
+    }
+  }
+
+  @override
+  setEmail(String email) {
+    if (isValidEmail(email)) {
+      registerViewObject = registerViewObject.copyWith(email: email);
+    } else {
+      registerViewObject = registerViewObject.copyWith(email: '');
+    }
+  }
+
+  @override
+  setPassword(String pass) {
+    if (_isPasswordValid(pass)) {
+      registerViewObject = registerViewObject.copyWith(password: pass);
+    } else {
+      registerViewObject = registerViewObject.copyWith(password: "");
+    }
+  }
 }
 
 abstract class RegisterViewModelInput {
   register();
+
+  setFirstName(String firstName);
+  setLastName(String lastName);
+  setEmail(String email);
+  setPassword(String pass);
 
   Sink get inputFirstName;
   Sink get inputLastName;
