@@ -3,7 +3,11 @@ import 'package:clean_architecture_with_mvvm/presentation/register/register_view
 import 'package:flutter/material.dart';
 
 import '../common/state_renderer/state_render_impl.dart';
+import '../resources/asset_manager.dart';
 import '../resources/color_manager.dart';
+import '../resources/route_manager.dart';
+import '../resources/string_manager.dart';
+import '../resources/values_manager.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -26,6 +30,8 @@ class _RegisterViewState extends State<RegisterView> {
 
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+
+  final GlobalKey _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -77,7 +83,150 @@ class _RegisterViewState extends State<RegisterView> {
   }
 
   Widget _getContectWidget() {
-    return Container();
+    return Container(
+      padding: const EdgeInsets.only(
+        top: AppPadding.p100,
+      ),
+      child: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image.asset(AssetManager.splashLogo),
+              const SizedBox(height: AppPadding.p28),
+
+              // first Name
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                    stream: _viewModel.outputErrorFirstName,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _firstNameTextEditingController,
+                        decoration: InputDecoration(
+                          hintText: AppString.firstName,
+                          labelText: AppString.firstName,
+                          errorText: snapshot.data,
+                        ),
+                      );
+                    }),
+              ),
+              const SizedBox(height: AppPadding.p28),
+
+              // last name
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                    stream: _viewModel.outputErrorLastName,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        obscureText: true,
+                        controller: _lastNameTextEditingController,
+                        decoration: InputDecoration(
+                          hintText: AppString.lastName,
+                          labelText: AppString.lastName,
+                          errorText: snapshot.data,
+                        ),
+                      );
+                    }),
+              ),
+
+              // email
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                    stream: _viewModel.outputErrorEmail,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        obscureText: true,
+                        controller: _emailTextEditingController,
+                        decoration: InputDecoration(
+                          hintText: AppString.email,
+                          labelText: AppString.email,
+                          errorText: snapshot.data,
+                        ),
+                      );
+                    }),
+              ),
+
+              // password
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<String?>(
+                    stream: _viewModel.outputErrorPassword,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        obscureText: true,
+                        controller: _passwordTextEditingController,
+                        decoration: InputDecoration(
+                          hintText: AppString.password,
+                          labelText: AppString.password,
+                          errorText: snapshot.data,
+                        ),
+                      );
+                    }),
+              ),
+
+              const SizedBox(height: AppPadding.p28),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: StreamBuilder<bool>(
+                  stream: _viewModel.outputIsAllInputVlid,
+                  builder: (context, snapshot) {
+                    return SizedBox(
+                      width: double.infinity,
+                      height: AppSize.s40,
+                      child: ElevatedButton(
+                          onPressed: (snapshot.data ?? false)
+                              ? () {
+                                  _viewModel.register();
+                                }
+                              : null,
+                          child: const Text(AppString.login)),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28,
+                    right: AppPadding.p28,
+                    top: AppPadding.p8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.forgotPasswordRoute);
+                        },
+                        child: Text(
+                          AppString.alreadyHaveAccount,
+                          style: Theme.of(context).textTheme.subtitle2,
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.registerRoute);
+                        },
+                        child: Text(
+                          AppString.registerText,
+                          style: Theme.of(context).textTheme.subtitle2,
+                        )),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
