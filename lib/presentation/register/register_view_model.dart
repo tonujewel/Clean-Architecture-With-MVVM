@@ -57,7 +57,10 @@ class RegisterViewModel extends BaseViewModel
     throw UnimplementedError();
   }
 
-  // .... OUTPUT ......
+  @override
+  Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
+
+  // ................. OUTPUT ...............
 
   // first name =====>
   @override
@@ -86,6 +89,7 @@ class RegisterViewModel extends BaseViewModel
   Stream<String?> get outputErrorEmail => outputIsEmailValid
       .map((isEmailValid) => isEmailValid ? null : "Invalid email");
 
+// password
   @override
   Stream<bool> get outputIsPasswordValid => _passwordStreamController.stream
       .map((password) => _isPasswordValid(password));
@@ -93,6 +97,11 @@ class RegisterViewModel extends BaseViewModel
   @override
   Stream<String?> get outputErrorPassword => outputIsPasswordValid
       .map((isPasswordValid) => isPasswordValid ? null : "Invalid password");
+
+// all input valid
+  @override
+  Stream<bool> get outputIsAllInputVlid =>
+      _isAllInputValidStreamController.stream.map((_) => _isAllInputValid());
 
   //........... private function ............
 
@@ -108,15 +117,27 @@ class RegisterViewModel extends BaseViewModel
     return password.length >= 8;
   }
 
+  bool _isAllInputValid() {
+    return registerViewObject.firstName.isNotEmpty &&
+        registerViewObject.lastName.isNotEmpty &&
+        registerViewObject.email.isNotEmpty &&
+        registerViewObject.password.isNotEmpty;
+  }
+
+  _validate() {
+    inputAllInputValid.add(null);
+  }
+
   @override
-  setFirstName(String name) {
-    if (_isFirstNameValid(name)) {
+  setFirstName(String firstName) {
+    if (_isFirstNameValid(firstName)) {
       // update register object with first name
-      registerViewObject = registerViewObject.copyWith(firstName: name);
+      registerViewObject = registerViewObject.copyWith(firstName: firstName);
     } else {
       // reset user name value in register view object
       registerViewObject = registerViewObject.copyWith(firstName: '');
     }
+    _validate();
   }
 
   @override
@@ -126,6 +147,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerViewObject = registerViewObject.copyWith(lastName: '');
     }
+    _validate();
   }
 
   @override
@@ -135,6 +157,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerViewObject = registerViewObject.copyWith(email: '');
     }
+    _validate();
   }
 
   @override
@@ -144,6 +167,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerViewObject = registerViewObject.copyWith(password: "");
     }
+    _validate();
   }
 }
 
@@ -159,6 +183,7 @@ abstract class RegisterViewModelInput {
   Sink get inputLastName;
   Sink get inputEmail;
   Sink get inputPassword;
+  Sink get inputAllInputValid;
 }
 
 abstract class RegisterViewModelOutput {
@@ -171,4 +196,5 @@ abstract class RegisterViewModelOutput {
   Stream<String?> get outputErrorEmail;
   Stream<bool> get outputIsPasswordValid;
   Stream<String?> get outputErrorPassword;
+  Stream<bool> get outputIsAllInputVlid;
 }
