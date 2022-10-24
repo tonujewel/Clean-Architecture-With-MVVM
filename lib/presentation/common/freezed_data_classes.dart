@@ -13,5 +13,5 @@ class ForgotObject with _$ForgotObject {
 
 @freezed
 class RegisterObject with _$RegisterObject {
-  factory RegisterObject(String firstName , String lastName,String email, String password) = _RegisterObjectt;
+  factory RegisterObject(String firstName , String lastName,String email, String password, String profileImage) = _RegisterObjectt;
 }

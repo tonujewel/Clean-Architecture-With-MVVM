@@ -266,6 +266,7 @@ mixin _$RegisterObject {
   String get lastName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get profileImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RegisterObjectCopyWith<RegisterObject> get copyWith =>
@@ -277,7 +278,12 @@ abstract class $RegisterObjectCopyWith<$Res> {
   factory $RegisterObjectCopyWith(
           RegisterObject value, $Res Function(RegisterObject) then) =
       _$RegisterObjectCopyWithImpl<$Res>;
-  $Res call({String firstName, String lastName, String email, String password});
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String profileImage});
 }
 
 /// @nodoc
@@ -295,6 +301,7 @@ class _$RegisterObjectCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(_value.copyWith(
       firstName: firstName == freezed
@@ -313,6 +320,10 @@ class _$RegisterObjectCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      profileImage: profileImage == freezed
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -324,7 +335,12 @@ abstract class _$$_RegisterObjecttCopyWith<$Res>
           _$_RegisterObjectt value, $Res Function(_$_RegisterObjectt) then) =
       __$$_RegisterObjecttCopyWithImpl<$Res>;
   @override
-  $Res call({String firstName, String lastName, String email, String password});
+  $Res call(
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String profileImage});
 }
 
 /// @nodoc
@@ -344,6 +360,7 @@ class __$$_RegisterObjecttCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? email = freezed,
     Object? password = freezed,
+    Object? profileImage = freezed,
   }) {
     return _then(_$_RegisterObjectt(
       firstName == freezed
@@ -362,6 +379,10 @@ class __$$_RegisterObjecttCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      profileImage == freezed
+          ? _value.profileImage
+          : profileImage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -369,7 +390,8 @@ class __$$_RegisterObjecttCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RegisterObjectt implements _RegisterObjectt {
-  _$_RegisterObjectt(this.firstName, this.lastName, this.email, this.password);
+  _$_RegisterObjectt(this.firstName, this.lastName, this.email, this.password,
+      this.profileImage);
 
   @override
   final String firstName;
@@ -379,10 +401,12 @@ class _$_RegisterObjectt implements _RegisterObjectt {
   final String email;
   @override
   final String password;
+  @override
+  final String profileImage;
 
   @override
   String toString() {
-    return 'RegisterObject(firstName: $firstName, lastName: $lastName, email: $email, password: $password)';
+    return 'RegisterObject(firstName: $firstName, lastName: $lastName, email: $email, password: $password, profileImage: $profileImage)';
   }
 
   @override
@@ -393,7 +417,9 @@ class _$_RegisterObjectt implements _RegisterObjectt {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.profileImage, profileImage));
   }
 
   @override
@@ -402,7 +428,8 @@ class _$_RegisterObjectt implements _RegisterObjectt {
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password));
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(profileImage));
 
   @JsonKey(ignore: true)
   @override
@@ -411,8 +438,12 @@ class _$_RegisterObjectt implements _RegisterObjectt {
 }
 
 abstract class _RegisterObjectt implements RegisterObject {
-  factory _RegisterObjectt(final String firstName, final String lastName,
-      final String email, final String password) = _$_RegisterObjectt;
+  factory _RegisterObjectt(
+      final String firstName,
+      final String lastName,
+      final String email,
+      final String password,
+      final String profileImage) = _$_RegisterObjectt;
 
   @override
   String get firstName;
@@ -422,6 +453,8 @@ abstract class _RegisterObjectt implements RegisterObject {
   String get email;
   @override
   String get password;
+  @override
+  String get profileImage;
   @override
   @JsonKey(ignore: true)
   _$$_RegisterObjecttCopyWith<_$_RegisterObjectt> get copyWith =>

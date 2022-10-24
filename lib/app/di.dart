@@ -13,6 +13,7 @@ import 'package:clean_architecture_with_mvvm/presentation/login/login_view_model
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final instance = GetIt.instance;
@@ -60,14 +61,18 @@ initLoginModule() {
 initForgotModule() {
   if (!GetIt.I.isRegistered<ForgotUseCase>()) {
     instance.registerFactory<ForgotUseCase>(() => ForgotUseCase(instance()));
-    instance.registerFactory<ForgotPasswordViewModel>(() => ForgotPasswordViewModel(instance()));
+    instance.registerFactory<ForgotPasswordViewModel>(
+        () => ForgotPasswordViewModel(instance()));
   }
 }
 
 // forgot module
 initRegisterModule() {
   if (!GetIt.I.isRegistered<RegisterUseCase>()) {
-    instance.registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
-    instance.registerFactory<RegisterViewModel>(() => RegisterViewModel(instance()));
+    instance
+        .registerFactory<RegisterUseCase>(() => RegisterUseCase(instance()));
+    instance.registerFactory<RegisterViewModel>(
+        () => RegisterViewModel(instance()));
+    instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }

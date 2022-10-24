@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/asset_manager.dart';
@@ -18,6 +22,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final RegisterViewModel _viewModel = instance<RegisterViewModel>();
+  final ImagePicker picker = instance<ImagePicker>();
 
   final TextEditingController _firstNameTextEditingController =
       TextEditingController();
@@ -37,6 +42,12 @@ class _RegisterViewState extends State<RegisterView> {
   void initState() {
     _bind();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
   }
 
   _bind() {
@@ -133,7 +144,7 @@ class _RegisterViewState extends State<RegisterView> {
                       );
                     }),
               ),
-
+              const SizedBox(height: AppPadding.p28),
               // email
               Padding(
                 padding: const EdgeInsets.only(
@@ -152,7 +163,7 @@ class _RegisterViewState extends State<RegisterView> {
                       );
                     }),
               ),
-
+              const SizedBox(height: AppPadding.p28),
               // password
               Padding(
                 padding: const EdgeInsets.only(
@@ -171,7 +182,26 @@ class _RegisterViewState extends State<RegisterView> {
                       );
                     }),
               ),
+              const SizedBox(height: AppPadding.p28),
+              // profile image
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: AppPadding.p28, right: AppPadding.p28),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.s4),
+                    border: Border.all(color: ColorManager.black),
+                  ),
+                  child: GestureDetector(
+                    onTap: () {
+                      _showPicker(context);
+                    },
+                    child: _getMedialWidget(),
+                  ),
+                ),
+              ),
 
+              // register button
               const SizedBox(height: AppPadding.p28),
               Padding(
                 padding: const EdgeInsets.only(
@@ -188,39 +218,27 @@ class _RegisterViewState extends State<RegisterView> {
                                   _viewModel.register();
                                 }
                               : null,
-                          child: const Text(AppString.login)),
+                          child: const Text(AppString.registration)),
                     );
                   },
                 ),
               ),
+              // aleady have account
               Padding(
                 padding: const EdgeInsets.only(
                     left: AppPadding.p28,
                     right: AppPadding.p28,
                     top: AppPadding.p8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.forgotPasswordRoute);
-                        },
-                        child: Text(
-                          AppString.alreadyHaveAccount,
-                          style: Theme.of(context).textTheme.subtitle2,
-                        )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.registerRoute);
-                        },
-                        child: Text(
-                          AppString.registerText,
-                          style: Theme.of(context).textTheme.subtitle2,
-                        )),
-                  ],
-                ),
+                child: TextButton(
+                    onPressed: () {
+                      // Navigator.pop(context);
+                      Navigator.pushReplacementNamed(
+                          context, Routes.loginRoute);
+                    },
+                    child: Text(
+                      AppString.alreadyHaveAccount,
+                      style: Theme.of(context).textTheme.subtitle2,
+                    )),
               )
             ],
           ),
@@ -229,9 +247,75 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  @override
-  void dispose() {
-    _viewModel.dispose();
-    super.dispose();
+  void _showPicker(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+              child: Wrap(
+            children: [
+              ListTile(
+                trailing: const Icon(Icons.arrow_forward),
+                leading: const Icon(Icons.camera),
+                title: const Text(AppString.photoFromGallery),
+                onTap: () {
+                  _imageFromGallery();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                trailing: const Icon(Icons.arrow_forward),
+                leading: const Icon(Icons.camera_alt_rounded),
+                title: const Text(AppString.photoFromCamera),
+                onTap: () {
+                  _imageFromCamera();
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          ));
+        });
+  }
+
+  _imageFromGallery() async {
+    var image = await picker.pickImage(source: ImageSource.gallery);
+    // TODO:  NEED TO
+    _viewModel.setProfilePicture(File(image?.path ?? ""));
+  }
+
+  _imageFromCamera() async{
+       var image = await picker.pickImage(source: ImageSource.camera);
+    // TODO:  NEED TO
+    _viewModel.setProfilePicture(File(image?.path ?? ""));
+  }
+
+  Widget _getMedialWidget() {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Flexible(
+              child: Text(
+            AppString.profilePicture,
+            style: TextStyle(fontSize: 12),
+          )),
+          StreamBuilder<File?>(
+              stream: _viewModel.outputProfilePicture,
+              builder: (context, snapshot) {
+                return _imagePicByUser(snapshot.data);
+              }),
+          Flexible(child: SvgPicture.asset(AssetManager.cameraIcon))
+        ],
+      ),
+    );
+  }
+
+  Widget _imagePicByUser(File? image) {
+    if (image != null && image.path.isNotEmpty) {
+      return Image.file(image);
+    } else {
+      return const SizedBox();
+    }
   }
 }

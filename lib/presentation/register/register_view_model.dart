@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:clean_architecture_with_mvvm/app/functions.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/register_use_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
@@ -20,8 +21,11 @@ class RegisterViewModel extends BaseViewModel
   final StreamController _isAllInputValidStreamController =
       StreamController<String>.broadcast();
 
+  final StreamController<File> _profileStreamController =
+      StreamController<File>.broadcast();
+
   final RegisterUseCase _registerUseCase;
-  var registerViewObject = RegisterObject('', '', '', '');
+  var registerViewObject = RegisterObject('', '', '', '', '');
   RegisterViewModel(this._registerUseCase);
 
   @override
@@ -46,7 +50,7 @@ class RegisterViewModel extends BaseViewModel
     }, (data) {
       // right -> success (data)
       inputState.add(ContentState());
-    //  isLoginSuccessfullyStreamController.add(true);
+      //  isLoginSuccessfullyStreamController.add(true);
     });
   }
 
@@ -57,6 +61,7 @@ class RegisterViewModel extends BaseViewModel
     _emailStreamController.close();
     _passwordStreamController.close();
     _isAllInputValidStreamController.close();
+    _profileStreamController.close();
 
     super.dispose();
   }
@@ -78,9 +83,12 @@ class RegisterViewModel extends BaseViewModel
   @override
   Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
 
+  @override
+  Sink get inputProfilePicture => _profileStreamController.sink;
+
   // ................. OUTPUT ...............
 
-  // first name =====>
+  // first name
   @override
   Stream<bool> get outputIsFirstNameValid => _firstNameStreamController.stream
       .map((firstName) => _isFirstNameValid(firstName));
@@ -89,7 +97,7 @@ class RegisterViewModel extends BaseViewModel
   Stream<String?> get outputErrorFirstName => outputIsFirstNameValid.map(
       (isFirstNameValid) => isFirstNameValid ? null : "Invalid first name");
 
-// last name ====>
+// last name
   @override
   Stream<bool> get outputIsLastNameValid => _lastNameStreamController.stream
       .map((lastName) => _isLastNameValid(lastName));
@@ -98,7 +106,7 @@ class RegisterViewModel extends BaseViewModel
   Stream<String?> get outputErrorLastName => outputIsLastNameValid
       .map((isLastNameValid) => isLastNameValid ? null : "Invalid last name");
 
-// email  ====>
+// email
   @override
   Stream<bool> get outputIsEmailValid =>
       _emailStreamController.stream.map((email) => isValidEmail(email));
@@ -120,6 +128,10 @@ class RegisterViewModel extends BaseViewModel
   @override
   Stream<bool> get outputIsAllInputVlid =>
       _isAllInputValidStreamController.stream.map((_) => _isAllInputValid());
+
+  // profile picture
+  Stream<File?> get outputProfilePicture =>
+      _profileStreamController.stream.map((profilePicture) => profilePicture);
 
   //........... private function ............
 
@@ -187,6 +199,16 @@ class RegisterViewModel extends BaseViewModel
     }
     _validate();
   }
+
+  @override
+  setProfilePicture(File file) {
+    if (file.path.isNotEmpty) {
+      registerViewObject = registerViewObject.copyWith(profileImage: file.path);
+    } else {
+      registerViewObject = registerViewObject.copyWith(profileImage: '');
+    }
+    _validate();
+  }
 }
 
 abstract class RegisterViewModelInput {
@@ -196,12 +218,14 @@ abstract class RegisterViewModelInput {
   setLastName(String lastName);
   setEmail(String email);
   setPassword(String pass);
+  setProfilePicture(File file);
 
   Sink get inputFirstName;
   Sink get inputLastName;
   Sink get inputEmail;
   Sink get inputPassword;
   Sink get inputAllInputValid;
+  Sink get inputProfilePicture;
 }
 
 abstract class RegisterViewModelOutput {
@@ -215,4 +239,5 @@ abstract class RegisterViewModelOutput {
   Stream<bool> get outputIsPasswordValid;
   Stream<String?> get outputErrorPassword;
   Stream<bool> get outputIsAllInputVlid;
+  Stream<File?> get outputProfilePicture;
 }
