@@ -2,6 +2,9 @@ import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
 import 'package:flutter/material.dart';
 
+import '../common/state_renderer/state_render_impl.dart';
+import '../resources/color_manager.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
@@ -56,11 +59,25 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Sign up"),
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      body: StreamBuilder<FlowState>(
+        stream: _viewModel.outputState,
+        builder: (context, snapshot) {
+          return Center(
+            child: snapshot.data?.getScreenWidget(context, _getContectWidget(),
+                    () {
+                  _viewModel.register();
+                }) ??
+                _getContectWidget(),
+          );
+        },
       ),
     );
+  }
+
+  Widget _getContectWidget() {
+    return Container();
   }
 
   @override
