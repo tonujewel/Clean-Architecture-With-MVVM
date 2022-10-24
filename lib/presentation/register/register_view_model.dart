@@ -1,9 +1,11 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:clean_architecture_with_mvvm/app/functions.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/register_use_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/common/freezed_data_classes.dart';
+
+import '../common/state_renderer/state_render_impl.dart';
+import '../common/state_renderer/state_renderer.dart';
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInput, RegisterViewModelOutput {
@@ -24,7 +26,28 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   void start() {
-    // TODO: implement start
+    inputState.add(ContentState());
+  }
+
+  @override
+  register() async {
+    inputState.add(
+        LoadingState(stateRendererType: StateRendererType.POPUP_LOADING_STATE));
+    (await _registerUseCase.execute(RegisterUseCaseInput(
+            registerViewObject.firstName,
+            registerViewObject.lastName,
+            registerViewObject.email,
+            registerViewObject.password,
+            "imei")))
+        .fold((failure) {
+      // left -> failure
+      inputState.add(
+          ErrorState(StateRendererType.PUPUP_ERROR_STATE, failure.message));
+    }, (data) {
+      // right -> success (data)
+      inputState.add(ContentState());
+    //  isLoginSuccessfullyStreamController.add(true);
+    });
   }
 
   @override
@@ -51,11 +74,6 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
-
-  @override
-  register() {
-    throw UnimplementedError();
-  }
 
   @override
   Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
