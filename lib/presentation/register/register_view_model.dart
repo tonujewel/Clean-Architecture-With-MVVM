@@ -20,7 +20,7 @@ class RegisterViewModel extends BaseViewModel
   final StreamController _isAllInputValidStreamController =
       StreamController<String>.broadcast();
 
-  RegisterUseCase _registerUseCase;
+  final RegisterUseCase _registerUseCase;
   var registerViewObject = RegisterObject('', '', '', '');
   RegisterViewModel(this._registerUseCase);
 

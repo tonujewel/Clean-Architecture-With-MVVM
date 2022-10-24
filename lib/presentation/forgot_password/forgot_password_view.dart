@@ -146,4 +146,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }
