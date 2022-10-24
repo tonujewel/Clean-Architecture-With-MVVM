@@ -42,7 +42,7 @@ class RegisterViewModel extends BaseViewModel
             registerViewObject.lastName,
             registerViewObject.email,
             registerViewObject.password,
-            "imei")))
+            registerViewObject.profileImage)))
         .fold((failure) {
       // left -> failure
       inputState.add(
@@ -81,10 +81,10 @@ class RegisterViewModel extends BaseViewModel
   Sink get inputPassword => _passwordStreamController.sink;
 
   @override
-  Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
+  Sink get inputProfilePicture => _profileStreamController.sink;
 
   @override
-  Sink get inputProfilePicture => _profileStreamController.sink;
+  Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
 
   // ................. OUTPUT ...............
 
@@ -130,6 +130,7 @@ class RegisterViewModel extends BaseViewModel
       _isAllInputValidStreamController.stream.map((_) => _isAllInputValid());
 
   // profile picture
+  @override
   Stream<File?> get outputProfilePicture =>
       _profileStreamController.stream.map((profilePicture) => profilePicture);
 
@@ -148,10 +149,13 @@ class RegisterViewModel extends BaseViewModel
   }
 
   bool _isAllInputValid() {
-    return registerViewObject.firstName.isNotEmpty &&
-        registerViewObject.lastName.isNotEmpty &&
-        registerViewObject.email.isNotEmpty &&
-        registerViewObject.password.isNotEmpty;
+    return true;
+
+    // return registerViewObject.firstName.isNotEmpty &&
+    //     registerViewObject.lastName.isNotEmpty &&
+    //     registerViewObject.email.isNotEmpty &&
+    //     registerViewObject.password.isNotEmpty &&
+    //     registerViewObject.profileImage.isNotEmpty;
   }
 
   _validate() {
@@ -160,6 +164,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setFirstName(String firstName) {
+    inputFirstName.add(firstName);
     if (_isFirstNameValid(firstName)) {
       // update register object with first name
       registerViewObject = registerViewObject.copyWith(firstName: firstName);
@@ -172,6 +177,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setLastName(String lastName) {
+    inputLastName.add(lastName);
     if (_isLastNameValid(lastName)) {
       registerViewObject = registerViewObject.copyWith(lastName: lastName);
     } else {
@@ -182,6 +188,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setEmail(String email) {
+    inputEmail.add(email);
     if (isValidEmail(email)) {
       registerViewObject = registerViewObject.copyWith(email: email);
     } else {
@@ -192,6 +199,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setPassword(String pass) {
+    inputPassword.add(pass);
     if (_isPasswordValid(pass)) {
       registerViewObject = registerViewObject.copyWith(password: pass);
     } else {
@@ -202,6 +210,7 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   setProfilePicture(File file) {
+    inputProfilePicture.add(file);
     if (file.path.isNotEmpty) {
       registerViewObject = registerViewObject.copyWith(profileImage: file.path);
     } else {

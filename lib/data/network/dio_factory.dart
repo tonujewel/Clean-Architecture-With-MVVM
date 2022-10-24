@@ -11,11 +11,12 @@ const String AUTHORIZATION = "authorization";
 const String DEFAULT_LANGUAGE = "language";
 
 class DioFactory {
-  AppPreferences _appPreferences;
+  final AppPreferences _appPreferences;
   DioFactory(this._appPreferences);
   Future<Dio> getDio() async {
     Dio dio = Dio();
     int _timeOut = 60 * 1000;
+   
     String language =await _appPreferences.getAppLanguage();
 
     Map<String, String> header = {

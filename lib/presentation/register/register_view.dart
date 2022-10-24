@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../common/state_renderer/state_render_impl.dart';
 import '../resources/asset_manager.dart';
 import '../resources/color_manager.dart';
-import '../resources/route_manager.dart';
 import '../resources/string_manager.dart';
 import '../resources/values_manager.dart';
 
@@ -192,7 +189,7 @@ class _RegisterViewState extends State<RegisterView> {
                     borderRadius: BorderRadius.circular(AppSize.s4),
                     border: Border.all(color: ColorManager.black),
                   ),
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: () {
                       _showPicker(context);
                     },
@@ -213,6 +210,11 @@ class _RegisterViewState extends State<RegisterView> {
                       width: double.infinity,
                       height: AppSize.s40,
                       child: ElevatedButton(
+                          // onPressed: () {
+                          //   //
+
+                          //   print(snapshot.data);
+                          // },
                           onPressed: (snapshot.data ?? false)
                               ? () {
                                   _viewModel.register();
@@ -231,9 +233,7 @@ class _RegisterViewState extends State<RegisterView> {
                     top: AppPadding.p8),
                 child: TextButton(
                     onPressed: () {
-                      // Navigator.pop(context);
-                      Navigator.pushReplacementNamed(
-                          context, Routes.loginRoute);
+                      Navigator.pop(context);
                     },
                     child: Text(
                       AppString.alreadyHaveAccount,
@@ -268,6 +268,8 @@ class _RegisterViewState extends State<RegisterView> {
                 leading: const Icon(Icons.camera_alt_rounded),
                 title: const Text(AppString.photoFromCamera),
                 onTap: () {
+                  // Navigator.pop(context);
+                  // Navigator.of(context).pop();
                   _imageFromCamera();
                   Navigator.of(context).pop();
                 },
@@ -279,13 +281,12 @@ class _RegisterViewState extends State<RegisterView> {
 
   _imageFromGallery() async {
     var image = await picker.pickImage(source: ImageSource.gallery);
-    // TODO:  NEED TO
     _viewModel.setProfilePicture(File(image?.path ?? ""));
   }
 
-  _imageFromCamera() async{
-       var image = await picker.pickImage(source: ImageSource.camera);
-    // TODO:  NEED TO
+  _imageFromCamera() async {
+    var image = await picker.pickImage(source: ImageSource.camera);
+
     _viewModel.setProfilePicture(File(image?.path ?? ""));
   }
 
@@ -313,7 +314,7 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _imagePicByUser(File? image) {
     if (image != null && image.path.isNotEmpty) {
-      return Image.file(image);
+      return Image.file(image, height: 30);
     } else {
       return const SizedBox();
     }

@@ -6,7 +6,7 @@ const PREF_KEY_ONBOARDING_SCREEN = "PREF_KEY_ONBOARDING_SCREEN";
 const PREF_KEY_IS_USER_LOGGED_IN = "PREF_KEY_IS_USER_LOGGED_IN";
 
 class AppPreferences {
-  SharedPreferences _sharedPreferences;
+  final SharedPreferences _sharedPreferences;
   AppPreferences(this._sharedPreferences);
 
   Future<String> getAppLanguage() async {
