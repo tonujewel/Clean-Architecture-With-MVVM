@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../resources/string_manager.dart';
+import '../../resources/string_manager.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

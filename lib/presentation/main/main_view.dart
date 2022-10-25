@@ -1,4 +1,4 @@
-import 'package:clean_architecture_with_mvvm/presentation/main/home_view.dart';
+import 'package:clean_architecture_with_mvvm/presentation/main/home/home_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/main/notification_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/main/search_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/main/setting_view.dart';
