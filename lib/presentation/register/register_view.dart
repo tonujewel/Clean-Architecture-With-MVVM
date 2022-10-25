@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
@@ -131,7 +132,6 @@ class _RegisterViewState extends State<RegisterView> {
                     stream: _viewModel.outputErrorLastName,
                     builder: (context, snapshot) {
                       return TextFormField(
-                        obscureText: true,
                         controller: _lastNameTextEditingController,
                         decoration: InputDecoration(
                           hintText: AppString.lastName,
@@ -150,7 +150,6 @@ class _RegisterViewState extends State<RegisterView> {
                     stream: _viewModel.outputErrorEmail,
                     builder: (context, snapshot) {
                       return TextFormField(
-                        obscureText: true,
                         controller: _emailTextEditingController,
                         decoration: InputDecoration(
                           hintText: AppString.email,
@@ -201,30 +200,25 @@ class _RegisterViewState extends State<RegisterView> {
               // register button
               const SizedBox(height: AppPadding.p28),
               Padding(
-                padding: const EdgeInsets.only(
-                    left: AppPadding.p28, right: AppPadding.p28),
-                child: StreamBuilder<bool>(
-                  stream: _viewModel.outputIsAllInputVlid,
-                  builder: (context, snapshot) {
-                    return SizedBox(
-                      width: double.infinity,
-                      height: AppSize.s40,
-                      child: ElevatedButton(
-                          // onPressed: () {
-                          //   //
+                  padding: const EdgeInsets.only(
+                      left: AppPadding.p28, right: AppPadding.p28),
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsAllInputsValid,
+                    builder: (context, snapshot) {
+                      return SizedBox(
+                        width: double.infinity,
+                        height: AppSize.s40,
+                        child: ElevatedButton(
+                            onPressed: (snapshot.data ?? false)
+                                ? () {
+                                    _viewModel.register();
+                                  }
+                                : null,
+                            child: const Text(AppString.registration)),
+                      );
+                    },
+                  )),
 
-                          //   print(snapshot.data);
-                          // },
-                          onPressed: (snapshot.data ?? false)
-                              ? () {
-                                  _viewModel.register();
-                                }
-                              : null,
-                          child: const Text(AppString.registration)),
-                    );
-                  },
-                ),
-              ),
               // aleady have account
               Padding(
                 padding: const EdgeInsets.only(

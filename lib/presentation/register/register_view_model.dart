@@ -18,8 +18,8 @@ class RegisterViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
-  final StreamController _isAllInputValidStreamController =
-      StreamController<String>.broadcast();
+  StreamController _isAllInputsValidStreamController =
+      StreamController<void>.broadcast();
 
   final StreamController<File> _profileStreamController =
       StreamController<File>.broadcast();
@@ -60,7 +60,7 @@ class RegisterViewModel extends BaseViewModel
     _lastNameStreamController.close();
     _emailStreamController.close();
     _passwordStreamController.close();
-    _isAllInputValidStreamController.close();
+    _isAllInputsValidStreamController.close();
     _profileStreamController.close();
 
     super.dispose();
@@ -84,7 +84,7 @@ class RegisterViewModel extends BaseViewModel
   Sink get inputProfilePicture => _profileStreamController.sink;
 
   @override
-  Sink get inputAllInputValid => _isAllInputValidStreamController.sink;
+  Sink get inputAllInputsValid => _isAllInputsValidStreamController.sink;
 
   // ................. OUTPUT ...............
 
@@ -125,9 +125,9 @@ class RegisterViewModel extends BaseViewModel
       .map((isPasswordValid) => isPasswordValid ? null : "Invalid password");
 
 // all input valid
-  @override
-  Stream<bool> get outputIsAllInputVlid =>
-      _isAllInputValidStreamController.stream.map((_) => _isAllInputValid());
+ @override
+  Stream<bool> get outputIsAllInputsValid =>
+      _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
 
   // profile picture
   @override
@@ -148,18 +148,16 @@ class RegisterViewModel extends BaseViewModel
     return password.length >= 8;
   }
 
-  bool _isAllInputValid() {
-    return true;
-
-    // return registerViewObject.firstName.isNotEmpty &&
-    //     registerViewObject.lastName.isNotEmpty &&
-    //     registerViewObject.email.isNotEmpty &&
-    //     registerViewObject.password.isNotEmpty &&
-    //     registerViewObject.profileImage.isNotEmpty;
+   bool _validateAllInputs() {
+    return registerViewObject.profileImage.isNotEmpty &&
+        registerViewObject.email.isNotEmpty &&
+        registerViewObject.password.isNotEmpty &&
+        registerViewObject.firstName.isNotEmpty &&
+        registerViewObject.lastName.isNotEmpty;
   }
 
-  _validate() {
-    inputAllInputValid.add(null);
+ _validate() {
+    inputAllInputsValid.add(null);
   }
 
   @override
@@ -233,7 +231,7 @@ abstract class RegisterViewModelInput {
   Sink get inputLastName;
   Sink get inputEmail;
   Sink get inputPassword;
-  Sink get inputAllInputValid;
+  Sink get inputAllInputsValid;
   Sink get inputProfilePicture;
 }
 
@@ -247,6 +245,6 @@ abstract class RegisterViewModelOutput {
   Stream<String?> get outputErrorEmail;
   Stream<bool> get outputIsPasswordValid;
   Stream<String?> get outputErrorPassword;
-  Stream<bool> get outputIsAllInputVlid;
+  Stream<bool> get outputIsAllInputsValid;
   Stream<File?> get outputProfilePicture;
 }
