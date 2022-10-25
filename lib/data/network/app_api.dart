@@ -17,7 +17,6 @@ abstract class AppServiceClient {
   @POST("authentication/forget-password")
   Future<BaseResponse> forgotPassword(@Field("email") String email);
 
-
   @POST("register")
   Future<AuthenticationResponse> register(
     @Field("first_name") String firstName,
@@ -25,4 +24,7 @@ abstract class AppServiceClient {
     @Field("email") String email,
     @Field("password") String password,
   );
+
+  @GET("product/list")
+  Future<RestaurantDataResponse> getRestaurantData();
 }

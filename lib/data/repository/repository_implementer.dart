@@ -2,6 +2,7 @@ import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sourc
 import 'package:clean_architecture_with_mvvm/data/mapper/mapper.dart';
 import 'package:clean_architecture_with_mvvm/data/network/error_handler.dart';
 import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';
+import 'package:clean_architecture_with_mvvm/data/responses/response.dart';
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:clean_architecture_with_mvvm/data/request/request.dart';
 import 'package:clean_architecture_with_mvvm/data/network/failure.dart';
@@ -75,9 +76,36 @@ class RepositoryImpl extends Repository {
   Future<Either<Failure, Authentication>> register(
       RegisterRequest registerRequest) async {
     if (await _networkInfo.isConnected) {
-       try {
+      try {
         // internet connection is okay
         final response = await _remoteDataSource.reginster(registerRequest);
+        if (response.success == ApiInternalStatus.SUCCESS) {
+          // success
+          // then return right
+          return Right(response.toDomain());
+        } else {
+          //  do error business logic
+          // return left
+          return Left(
+              Failure(409, response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        // Error handle
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      // internet connection failed
+      // return left for the error
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, RestaurantData>> getRestaurantData() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        // internet connection is okay
+        final response = await _remoteDataSource.getRestaurantData();
         if (response.success == ApiInternalStatus.SUCCESS) {
           // success
           // then return right
