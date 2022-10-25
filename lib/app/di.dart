@@ -8,6 +8,7 @@ import 'package:clean_architecture_with_mvvm/domain/repositories/repository.dart
 import 'package:clean_architecture_with_mvvm/domain/use_case/forgot_user_case.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/login_use_case.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/register_use_case.dart';
+import 'package:clean_architecture_with_mvvm/domain/use_case/restaurant_usecase.dart';
 import 'package:clean_architecture_with_mvvm/presentation/forgot_password/forgot_password_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/login/login_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
@@ -15,6 +16,8 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../presentation/main/home/home_view_model.dart';
 
 final instance = GetIt.instance;
 
@@ -74,5 +77,12 @@ initRegisterModule() {
     instance.registerFactory<RegisterViewModel>(
         () => RegisterViewModel(instance()));
     instance.registerFactory<ImagePicker>(() => ImagePicker());
+  }
+}
+
+initHomeModule() {
+  if (!GetIt.I.isRegistered<RestaurantUseCase>()) {
+    instance.registerFactory<RestaurantUseCase>(() => RestaurantUseCase(instance()));
+    instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
   }
 }
