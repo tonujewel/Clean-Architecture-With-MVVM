@@ -38,7 +38,7 @@ class AppString {
   static const String sendVarificationCode = "Send verification code";
 
   //.............. SIGNUP SCREEN ...............//
-  
+
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String alreadyHaveAccount = "Aleady have an account? Login";
@@ -46,4 +46,11 @@ class AppString {
   static const String profilePicture = "Profile Picture";
   static const String photoFromGallery = "Photo from gallery";
   static const String photoFromCamera = "Photo from camera";
+
+  //.............. MAIN SCREEN ...............//
+
+  static const String home = "Home";
+  static const String notification = "Notification";
+  static const String search = "Search";
+  static const String settings = "Settings";
 }
