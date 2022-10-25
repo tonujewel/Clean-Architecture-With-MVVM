@@ -42,6 +42,30 @@ extension AuthenticationMapper on AuthenticationResponse? {
 
 extension BaseResponseMapper on BaseResponse? {
   Messages toDomain() {
-    return Messages(this?.message??EMPTY);
+    return Messages(this?.message ?? EMPTY);
+  }
+}
+
+//........ Restaurant Item .........
+
+extension RestaurantMapper on RestaurantResponse? {
+  Restaurant toDomain() {
+    return Restaurant(
+        this?.id.orEmpty() ?? ZERO,
+        this?.title.orEmpty() ?? EMPTY,
+        this?.image.orEmpty() ?? EMPTY,
+        this?.price.orEmpty() ?? ZERO);
+  }
+}
+
+extension RestaurantDatan on RestaurantDataResponse? {
+  RestaurantData toDomain() {
+
+     List<Restaurant> restaurant = 
+       (this?.restaurantData?.map((service) => service.toDomain()) ??
+                const Iterable.empty())
+            .cast<Restaurant>()
+            .toList();
+    return RestaurantData(restaurant);
   }
 }

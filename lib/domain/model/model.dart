@@ -55,3 +55,18 @@ class DeviceInfo {
 
   DeviceInfo(this.name, this.identifier, this.version);
 }
+
+class Restaurant {
+  int id;
+  String name;
+  String image;
+  int price;
+
+  Restaurant(this.id, this.name, this.image, this.price);
+}
+
+class RestaurantData {
+  List<Restaurant> data;
+
+  RestaurantData(this.data);
+}

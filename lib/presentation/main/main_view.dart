@@ -57,17 +57,16 @@ class _MainViewState extends State<MainView> {
             currentIndex: _currentIndex,
             onTap: onTap,
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home),label: titleList[0]),
-              BottomNavigationBarItem(icon: Icon(Icons.search),label: titleList[1]),
-              BottomNavigationBarItem(icon: Icon(Icons.notifications),label: titleList[2]),
-              BottomNavigationBarItem(icon: Icon(Icons.settings),label: titleList[3]),
+              BottomNavigationBarItem(icon: const Icon(Icons.home),label: titleList[0]),
+              BottomNavigationBarItem(icon:const Icon(Icons.search),label: titleList[1]),
+              BottomNavigationBarItem(icon:const Icon(Icons.notifications),label: titleList[2]),
+              BottomNavigationBarItem(icon:const Icon(Icons.settings),label: titleList[3]),
             ]),
       ),
     );
   }
 
   onTap(int index) {
-    //
     setState(() {
       _currentIndex = index;
       _title = titleList[index];
