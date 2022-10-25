@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
+import 'package:clean_architecture_with_mvvm/presentation/resources/route_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import '../common/state_renderer/state_render_impl.dart';
@@ -21,6 +24,7 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final RegisterViewModel _viewModel = instance<RegisterViewModel>();
   final ImagePicker picker = instance<ImagePicker>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
 
   final TextEditingController _firstNameTextEditingController =
       TextEditingController();
@@ -69,6 +73,15 @@ class _RegisterViewState extends State<RegisterView> {
     // password
     _passwordTextEditingController.addListener(() {
       _viewModel.setPassword(_passwordTextEditingController.text);
+    });
+
+    _viewModel.isUserLoggedInSuccessfullyStreamController.stream
+        .listen((isSuccessLoggedIn) {
+      // navigate to main screen
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _appPreferences.setIsUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
     });
   }
 

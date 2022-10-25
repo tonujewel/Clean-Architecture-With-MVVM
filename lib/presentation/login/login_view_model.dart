@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/state_render_impl.dart';
@@ -56,10 +57,12 @@ class LoginViewModel extends BaseViewModel
     (await _loginUseCase.execute(
             LoginUseCaseInput(loginObject.username, loginObject.password)))
         .fold((failure) {
+      log("failure $failure");
       // left -> failure
       inputState.add(
           ErrorState(StateRendererType.PUPUP_ERROR_STATE, failure.message));
     }, (data) {
+      log("failure $data");
       // right -> success (data)
       inputState.add(ContentState());
       isLoginSuccessfullyStreamController.add(true);

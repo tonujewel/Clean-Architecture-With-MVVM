@@ -52,8 +52,8 @@ class RouteGenerator {
   static Route<dynamic> undefineRoute() {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
-        appBar: AppBar(title: Text(AppString.noRouteFound)),
-        body: Center(
+        appBar: AppBar(title: const Text(AppString.noRouteFound)),
+        body: const Center(
           child: Text(AppString.noRouteFound),
         ),
       ),

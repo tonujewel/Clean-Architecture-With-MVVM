@@ -18,11 +18,14 @@ class RegisterViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
-  StreamController _isAllInputsValidStreamController =
+  final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
   final StreamController<File> _profileStreamController =
       StreamController<File>.broadcast();
+
+  StreamController isUserLoggedInSuccessfullyStreamController =
+      StreamController<bool>();
 
   final RegisterUseCase _registerUseCase;
   var registerViewObject = RegisterObject('', '', '', '', '');
@@ -51,6 +54,8 @@ class RegisterViewModel extends BaseViewModel
       // right -> success (data)
       inputState.add(ContentState());
       //  isLoginSuccessfullyStreamController.add(true);
+
+      isUserLoggedInSuccessfullyStreamController.add(true);
     });
   }
 
@@ -62,6 +67,7 @@ class RegisterViewModel extends BaseViewModel
     _passwordStreamController.close();
     _isAllInputsValidStreamController.close();
     _profileStreamController.close();
+    isUserLoggedInSuccessfullyStreamController.close();
 
     super.dispose();
   }
@@ -125,7 +131,7 @@ class RegisterViewModel extends BaseViewModel
       .map((isPasswordValid) => isPasswordValid ? null : "Invalid password");
 
 // all input valid
- @override
+  @override
   Stream<bool> get outputIsAllInputsValid =>
       _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
 
@@ -148,15 +154,14 @@ class RegisterViewModel extends BaseViewModel
     return password.length >= 8;
   }
 
-   bool _validateAllInputs() {
-    return registerViewObject.profileImage.isNotEmpty &&
-        registerViewObject.email.isNotEmpty &&
+  bool _validateAllInputs() {
+    return registerViewObject.email.isNotEmpty &&
         registerViewObject.password.isNotEmpty &&
         registerViewObject.firstName.isNotEmpty &&
         registerViewObject.lastName.isNotEmpty;
   }
 
- _validate() {
+  _validate() {
     inputAllInputsValid.add(null);
   }
 
