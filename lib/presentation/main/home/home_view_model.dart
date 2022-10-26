@@ -30,7 +30,6 @@ class HomeViewModel extends BaseViewModel
   }
 
   _getHome() async {
-  
     inputState.add(LoadingState(
         stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
 
@@ -40,9 +39,6 @@ class HomeViewModel extends BaseViewModel
     }, (homeObject) {
       inputState.add(ContentState());
       inputRestaurant.add(homeObject);
-      log("_getHome ${homeObject.data.length}");
-      // inputServices.add(homeObject.data.services);
-      // inputStores.add(homeObject.data.stores);
     });
   }
 

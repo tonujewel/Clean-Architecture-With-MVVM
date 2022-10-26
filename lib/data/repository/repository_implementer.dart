@@ -108,7 +108,6 @@ class RepositoryImpl extends Repository {
         // internet connection is okay
         final response = await _remoteDataSource.getRestaurantData();
 
-        log("repository ${response.restaurantData?.length}");
         if (response.success == ApiInternalStatus.SUCCESS) {
           // success
           // then return right
