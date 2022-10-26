@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/state_render_impl.dart';
+import 'package:clean_architecture_with_mvvm/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/string_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/values_manager.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final HomeViewModel _viewModel = instance<HomeViewModel>();
+
+  final placeholderImage = AssetManager.placeholder;
 
   @override
   void initState() {
@@ -99,8 +102,9 @@ class _HomeViewState extends State<HomeView> {
                               color: ColorManager.white, width: AppSize.s1_5)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(AppSize.s12),
-                        child: Image.network(
-                          banner.image,
+                        child: FadeInImage.assetNetwork(
+                          placeholder: placeholderImage,
+                          image: banner.image,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -146,8 +150,9 @@ class _HomeViewState extends State<HomeView> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(AppSize.s12),
-                            child: Image.network(
-                              service.image,
+                            child: FadeInImage.assetNetwork(
+                              placeholder: placeholderImage,
+                              image: service.image,
                               fit: BoxFit.cover,
                               width: AppSize.s100,
                               height: AppSize.s100,
@@ -209,8 +214,9 @@ class _HomeViewState extends State<HomeView> {
                   },
                   child: Card(
                     elevation: AppSize.s4,
-                    child: Image.network(
-                      stores[index].image,
+                    child: FadeInImage.assetNetwork(
+                      placeholder: placeholderImage,
+                      image: stores[index].image,
                       fit: BoxFit.cover,
                     ),
                   ),

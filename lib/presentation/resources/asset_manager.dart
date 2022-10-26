@@ -1,11 +1,13 @@
 const String imagePath = "assets/images";
 
 class AssetManager {
-  // commot
+  // common
   static const String holloCircleIc = "$imagePath/hollow_cirlce_ic.svg";
   static const String leftArroIc = "$imagePath/left_arrow_ic.svg";
   static const String rightArrowIc = "$imagePath/right_arrow_ic.svg";
   static const String solidCircleIc = "$imagePath/solid_circle_ic.svg";
+  static const String imagePreview = "$imagePath/image_preview.png";
+  static const String placeholder = "$imagePath/placeholder.gif";
 
   // splash
   static const String splashLogo = "$imagePath/splash_logo.png";
