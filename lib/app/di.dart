@@ -3,7 +3,7 @@ import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sourc
 import 'package:clean_architecture_with_mvvm/data/network/app_api.dart';
 import 'package:clean_architecture_with_mvvm/data/network/dio_factory.dart';
 import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';
-import 'package:clean_architecture_with_mvvm/data/repository/repository_implementer.dart';
+import 'package:clean_architecture_with_mvvm/data/repository/repository_impl.dart';
 import 'package:clean_architecture_with_mvvm/domain/repositories/repository.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/forgot_user_case.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/login_use_case.dart';
@@ -17,6 +17,7 @@ import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/data_sources/local_data_source.dart';
 import '../presentation/main/home/home_view_model.dart';
 
 final instance = GetIt.instance;
@@ -47,9 +48,13 @@ Future<void> initAppModule() async {
   instance.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImplementer(instance()));
 
+  // local data source
+  instance.registerLazySingleton<LocalDataSource>(
+      () => LocalDataSourceImplementer());
+
   // repository
   instance.registerLazySingleton<Repository>(
-      () => RepositoryImpl(instance(), instance()));
+      () => RepositoryImpl(instance(), instance(),instance()));
 }
 
 // login module
@@ -82,7 +87,8 @@ initRegisterModule() {
 
 initHomeModule() {
   if (!GetIt.I.isRegistered<RestaurantUseCase>()) {
-    instance.registerFactory<RestaurantUseCase>(() => RestaurantUseCase(instance()));
+    instance.registerFactory<RestaurantUseCase>(
+        () => RestaurantUseCase(instance()));
     instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
   }
 }
