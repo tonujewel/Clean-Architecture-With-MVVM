@@ -79,14 +79,14 @@ class AuthenticationResponse extends BaseResponse {
 class RestaurantResponse {
   @JsonKey(name: 'id')
   int? id;
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'title')
   String? title;
-  @JsonKey(name: 'image')
+  @JsonKey(name: 'thumbnail')
   String? image;
-  @JsonKey(name: 'price')
-  int? price;
+  @JsonKey(name: 'avg_delivery_time')
+  int? averageRatingTime;
 
-  RestaurantResponse(this.id, this.title, this.image, this.price);
+  RestaurantResponse(this.id, this.title, this.image, this.averageRatingTime);
 
 // toJson
   Map<String, dynamic> toJson() => _$RestaurantResponseToJson(this);
@@ -98,7 +98,7 @@ class RestaurantResponse {
 
 @JsonSerializable()
 class RestaurantDataResponse extends BaseResponse {
-  @JsonKey(name: 'result')
+  @JsonKey(name: 'data')
   List<RestaurantResponse>? restaurantData;
 
   RestaurantDataResponse(this.restaurantData);
@@ -109,4 +109,18 @@ class RestaurantDataResponse extends BaseResponse {
 //fromJson
   factory RestaurantDataResponse.fromJson(Map<String, dynamic> json) =>
       _$RestaurantDataResponseFromJson(json);
+}
+@JsonSerializable()
+class RestaurantResultResponse  {
+  @JsonKey(name: 'result')
+  RestaurantDataResponse? restaurantData;
+
+  RestaurantResultResponse(this.restaurantData);
+
+// toJson
+  Map<String, dynamic> toJson() => _$RestaurantResultResponseToJson(this);
+
+//fromJson
+  factory RestaurantResultResponse.fromJson(Map<String, dynamic> json) =>
+      _$RestaurantResultResponseFromJson(json);
 }

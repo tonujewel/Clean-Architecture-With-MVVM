@@ -54,7 +54,7 @@ extension RestaurantMapper on RestaurantResponse? {
         this?.id.orEmpty() ?? ZERO,
         this?.title.orEmpty() ?? EMPTY,
         this?.image.orEmpty() ?? EMPTY,
-        this?.price.orEmpty() ?? ZERO);
+        this?.averageRatingTime.orEmpty() ?? ZERO);
   }
 }
 

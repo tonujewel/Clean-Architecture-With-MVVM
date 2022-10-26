@@ -68,23 +68,23 @@ Map<String, dynamic> _$AuthenticationResponseToJson(
 RestaurantResponse _$RestaurantResponseFromJson(Map<String, dynamic> json) =>
     RestaurantResponse(
       json['id'] as int?,
-      json['name'] as String?,
-      json['image'] as String?,
-      json['price'] as int?,
+      json['title'] as String?,
+      json['thumbnail'] as String?,
+      json['avg_delivery_time'] as int?,
     );
 
 Map<String, dynamic> _$RestaurantResponseToJson(RestaurantResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'name': instance.title,
-      'image': instance.image,
-      'price': instance.price,
+      'title': instance.title,
+      'thumbnail': instance.image,
+      'avg_delivery_time': instance.averageRatingTime,
     };
 
 RestaurantDataResponse _$RestaurantDataResponseFromJson(
         Map<String, dynamic> json) =>
     RestaurantDataResponse(
-      (json['result'] as List<dynamic>?)
+      (json['data'] as List<dynamic>?)
           ?.map((e) => RestaurantResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
@@ -96,5 +96,20 @@ Map<String, dynamic> _$RestaurantDataResponseToJson(
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
+      'data': instance.restaurantData,
+    };
+
+RestaurantResultResponse _$RestaurantResultResponseFromJson(
+        Map<String, dynamic> json) =>
+    RestaurantResultResponse(
+      json['result'] == null
+          ? null
+          : RestaurantDataResponse.fromJson(
+              json['result'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$RestaurantResultResponseToJson(
+        RestaurantResultResponse instance) =>
+    <String, dynamic>{
       'result': instance.restaurantData,
     };
