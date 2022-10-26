@@ -13,13 +13,13 @@ import '../../../domain/model/model.dart';
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInput, HomeViewModelOutput {
   // ===>> this is boradcast stream controller
-  // final _restaurantStreamController = BehaviorSubject<List<Restaurant>>();
-  StreamController _bannersStreamController =
-      BehaviorSubject<List<Restaurant>>();
-  StreamController _servicesStreamController =
-      BehaviorSubject<List<Restaurant>>();
-  StreamController _storesStreamController =
-      BehaviorSubject<List<Restaurant>>();
+  final _restaurantStreamController = BehaviorSubject<RestaurantData>();
+  // StreamController _bannersStreamController =
+  //     BehaviorSubject<List<Restaurant>>();
+  // StreamController _servicesStreamController =
+  //     BehaviorSubject<List<Restaurant>>();
+  // StreamController _storesStreamController =
+  //     BehaviorSubject<List<Restaurant>>();
 
   final RestaurantUseCase _useCase;
   HomeViewModel(this._useCase);
@@ -30,7 +30,7 @@ class HomeViewModel extends BaseViewModel
   }
 
   _getHome() async {
-    log("jellp");
+  
     inputState.add(LoadingState(
         stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
 
@@ -39,7 +39,7 @@ class HomeViewModel extends BaseViewModel
           StateRendererType.FULL_SCREEN_ERROR_STATE, failure.message));
     }, (homeObject) {
       inputState.add(ContentState());
-      inputRestaurant.add(homeObject.data);
+      inputRestaurant.add(homeObject);
       log("_getHome ${homeObject.data.length}");
       // inputServices.add(homeObject.data.services);
       // inputStores.add(homeObject.data.stores);
@@ -48,17 +48,17 @@ class HomeViewModel extends BaseViewModel
 
   @override
   void dispose() {
-    _bannersStreamController.close();
+    _restaurantStreamController.close();
     super.dispose();
   }
 
   @override
-  Sink get inputRestaurant => _bannersStreamController.sink;
+  Sink get inputRestaurant => _restaurantStreamController.sink;
 
   @override
-  Stream<List<Restaurant>> get outputRestaurant =>
-      _bannersStreamController.stream.map((restaurant) {
-        log("stream ${restaurant}");
+  Stream<RestaurantData> get outputRestaurant =>
+      _restaurantStreamController.stream.map((restaurant) {
+        log("stream $restaurant");
         return restaurant;
       });
 }
@@ -68,5 +68,5 @@ abstract class HomeViewModelInput {
 }
 
 abstract class HomeViewModelOutput {
-  Stream<List<Restaurant>> get outputRestaurant;
+  Stream<RestaurantData> get outputRestaurant;
 }

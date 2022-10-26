@@ -53,15 +53,21 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _getContentWidgets() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _getBannersCarousel(),
-        _getSection(AppString.services),
-        _getServices(),
-        _getSection(AppString.stores),
-        _getStores()
-      ],
+   
+    return StreamBuilder<RestaurantData>(
+      stream: _viewModel.outputRestaurant,
+      builder: (context, snapshot) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _getBanner(snapshot.data?.data),
+            _getSection(AppString.services),
+            _getServicesWidget(snapshot.data?.data),
+            _getSection(AppString.stores),
+            _getStoresWidget(snapshot.data?.data)
+          ],
+        );
+      }
     );
   }
 
@@ -79,14 +85,14 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget _getBannersCarousel() {
-    return StreamBuilder<List<Restaurant>>(
-        stream: _viewModel.outputRestaurant,
-        builder: (context, snapshot) {
-          log("home : ${snapshot.data?.length}");
-          return _getBanner(snapshot.data);
-        });
-  }
+  // Widget _getBannersCarousel() {
+  //   return StreamBuilder<List<Restaurant>>(
+  //       stream: _viewModel.outputRestaurant,
+  //       builder: (context, snapshot) {
+  //         log("home : ${snapshot.data?.length}");
+  //         return _getBanner(snapshot.data);
+  //       });
+  // }
 
   Widget _getBanner(List<Restaurant>? banners) {
     if (banners != null) {
@@ -121,13 +127,13 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
-  Widget _getServices() {
-    return StreamBuilder<List<Restaurant>>(
-        stream: _viewModel.outputRestaurant,
-        builder: (context, snapshot) {
-          return _getServicesWidget(snapshot.data);
-        });
-  }
+  // Widget _getServices() {
+  //   return StreamBuilder<List<Restaurant>>(
+  //       stream: _viewModel.outputRestaurant,
+  //       builder: (context, snapshot) {
+  //         return _getServicesWidget(snapshot.data);
+  //       });
+  // }
 
   Widget _getServicesWidget(List<Restaurant>? services) {
     if (services != null) {
@@ -184,13 +190,13 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
-  Widget _getStores() {
-    return StreamBuilder<List<Restaurant>>(
-        stream: _viewModel.outputRestaurant,
-        builder: (context, snapshot) {
-          return _getStoresWidget(snapshot.data);
-        });
-  }
+  // Widget _getStores() {
+  //   return StreamBuilder<List<Restaurant>>(
+  //       stream: _viewModel.outputRestaurant,
+  //       builder: (context, snapshot) {
+  //         return _getStoresWidget(snapshot.data);
+  //       });
+  // }
 
   Widget _getStoresWidget(List<Restaurant>? stores) {
     if (stores != null) {
