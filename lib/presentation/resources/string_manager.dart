@@ -53,4 +53,9 @@ class AppString {
   static const String notification = "Notification";
   static const String search = "Search";
   static const String settings = "Settings";
+
+  //.............. HOME SCREEN ...............//
+
+  static const String services = "Services";
+  static const String stores = "Stores";
 }

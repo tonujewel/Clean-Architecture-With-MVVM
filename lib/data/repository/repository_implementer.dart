@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sources.dart';
 import 'package:clean_architecture_with_mvvm/data/mapper/mapper.dart';
 import 'package:clean_architecture_with_mvvm/data/network/error_handler.dart';
 import 'package:clean_architecture_with_mvvm/data/network/network_info.dart';
-import 'package:clean_architecture_with_mvvm/data/responses/response.dart';
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:clean_architecture_with_mvvm/data/request/request.dart';
 import 'package:clean_architecture_with_mvvm/data/network/failure.dart';
@@ -10,8 +11,8 @@ import 'package:clean_architecture_with_mvvm/domain/repositories/repository.dart
 import 'package:dartz/dartz.dart';
 
 class RepositoryImpl extends Repository {
-  RemoteDataSource _remoteDataSource;
-  NetworkInfo _networkInfo;
+  final RemoteDataSource _remoteDataSource;
+  final NetworkInfo _networkInfo;
 
   RepositoryImpl(this._remoteDataSource, this._networkInfo);
 
@@ -106,6 +107,8 @@ class RepositoryImpl extends Repository {
       try {
         // internet connection is okay
         final response = await _remoteDataSource.getRestaurantData();
+
+        log("repository ${response.restaurantData?.length}");
         if (response.success == ApiInternalStatus.SUCCESS) {
           // success
           // then return right

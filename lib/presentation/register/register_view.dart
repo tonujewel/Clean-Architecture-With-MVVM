@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/di.dart';

@@ -103,7 +103,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Widget _getButtomSheetWidget(SliderViewObject sliderViewObject) {
     return Container(
-      color: ColorManager.primar,
+      color: ColorManager.primary,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

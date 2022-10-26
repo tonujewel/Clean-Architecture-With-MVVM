@@ -106,7 +106,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                   _viewModel.forgotPassword();
                                 }
                               : null,
-                          child: Text(AppString.sendVarificationCode)),
+                          child: const Text(AppString.sendVarificationCode)),
                     );
                   },
                 ),

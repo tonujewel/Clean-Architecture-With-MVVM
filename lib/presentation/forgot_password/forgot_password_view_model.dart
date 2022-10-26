@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:clean_architecture_with_mvvm/app/extensions.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/forgot_user_case.dart';
 import 'package:clean_architecture_with_mvvm/presentation/base_view_model/base_view_model.dart';

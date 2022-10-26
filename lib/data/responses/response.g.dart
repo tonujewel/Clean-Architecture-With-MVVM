@@ -84,7 +84,7 @@ Map<String, dynamic> _$RestaurantResponseToJson(RestaurantResponse instance) =>
 RestaurantDataResponse _$RestaurantDataResponseFromJson(
         Map<String, dynamic> json) =>
     RestaurantDataResponse(
-      (json['data'] as List<dynamic>?)
+      (json['result'] as List<dynamic>?)
           ?.map((e) => RestaurantResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     )
@@ -96,5 +96,5 @@ Map<String, dynamic> _$RestaurantDataResponseToJson(
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
-      'data': instance.restaurantData,
+      'result': instance.restaurantData,
     };

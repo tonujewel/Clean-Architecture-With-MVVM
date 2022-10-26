@@ -140,7 +140,7 @@ class _LoginViewState extends State<LoginView> {
                                   _viewModel.login();
                                 }
                               : null,
-                          child: Text(AppString.login)),
+                          child: const Text(AppString.login)),
                     );
                   },
                 ),

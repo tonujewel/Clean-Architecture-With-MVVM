@@ -30,7 +30,7 @@ class _MainViewState extends State<MainView> {
   ];
 
   var _title = AppString.home;
-  var _currentIndex = 2;
+  var _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +52,19 @@ class _MainViewState extends State<MainView> {
           ],
         ),
         child: BottomNavigationBar(
-            selectedItemColor: ColorManager.primar,
+            selectedItemColor: ColorManager.primary,
             unselectedItemColor: ColorManager.grey,
             currentIndex: _currentIndex,
             onTap: onTap,
             items: [
-              BottomNavigationBarItem(icon: const Icon(Icons.home),label: titleList[0]),
-              BottomNavigationBarItem(icon:const Icon(Icons.search),label: titleList[1]),
-              BottomNavigationBarItem(icon:const Icon(Icons.notifications),label: titleList[2]),
-              BottomNavigationBarItem(icon:const Icon(Icons.settings),label: titleList[3]),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.home), label: titleList[0]),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.search), label: titleList[1]),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.notifications), label: titleList[2]),
+              BottomNavigationBarItem(
+                  icon: const Icon(Icons.settings), label: titleList[3]),
             ]),
       ),
     );

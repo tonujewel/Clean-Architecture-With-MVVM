@@ -1,4 +1,3 @@
-import 'package:clean_architecture_with_mvvm/data/responses/response.dart';
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:dartz/dartz.dart';
 

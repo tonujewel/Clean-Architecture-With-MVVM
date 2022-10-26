@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/constant.dart';
 import 'package:dio/dio.dart';
@@ -34,7 +36,7 @@ class DioFactory {
     );
 
     if (kReleaseMode) {
-      print("Release mode no logs");
+      log("Release mode no logs");
     } else {
       dio.interceptors.add(
         PrettyDioLogger(

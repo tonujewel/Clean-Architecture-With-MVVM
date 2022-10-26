@@ -98,7 +98,7 @@ class RestaurantResponse {
 
 @JsonSerializable()
 class RestaurantDataResponse extends BaseResponse {
-  @JsonKey(name: 'data')
+  @JsonKey(name: 'result')
   List<RestaurantResponse>? restaurantData;
 
   RestaurantDataResponse(this.restaurantData);

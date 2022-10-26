@@ -7,7 +7,7 @@ import 'values_manager.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     // main color of the app
-    primaryColor: ColorManager.primar,
+    primaryColor: ColorManager.primary,
     primaryColorLight: ColorManager.primaryOpacity70,
     primaryColorDark: ColorManager.darkPrimary,
     disabledColor: ColorManager.grey1,
@@ -25,7 +25,7 @@ ThemeData getApplicationTheme() {
     // App bar theme
     appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: ColorManager.primar,
+        color: ColorManager.primary,
         elevation: AppSize.s4,
         shadowColor: ColorManager.primaryOpacity70,
         titleTextStyle: getRegularTextStyle(
@@ -37,7 +37,7 @@ ThemeData getApplicationTheme() {
     buttonTheme: ButtonThemeData(
       shape: const StadiumBorder(),
       disabledColor: ColorManager.grey,
-      buttonColor: ColorManager.primar,
+      buttonColor: ColorManager.primary,
       splashColor: ColorManager.primaryOpacity70,
     ),
 
@@ -45,7 +45,7 @@ ThemeData getApplicationTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         textStyle: getRegularTextStyle(color: ColorManager.white),
-        backgroundColor: ColorManager.primar,
+        backgroundColor: ColorManager.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s12),
         ),
@@ -58,10 +58,12 @@ ThemeData getApplicationTheme() {
           color: ColorManager.darkGrey, fontSize: FontSize.s16),
       headline2: getRegularTextStyle(
           color: ColorManager.white, fontSize: FontSize.s16),
+      headline3: getRegularTextStyle(
+          color: ColorManager.primary, fontSize: FontSize.s16),
       subtitle1: getMediumTextStyle(
           color: ColorManager.lightGrey, fontSize: FontSize.s14),
       subtitle2: getMediumTextStyle(
-          color: ColorManager.primar, fontSize: FontSize.s14),
+          color: ColorManager.primary, fontSize: FontSize.s14),
       caption: getRegularTextStyle(color: ColorManager.grey1),
       bodyText1: getRegularTextStyle(color: ColorManager.grey),
     ),
@@ -80,7 +82,8 @@ ThemeData getApplicationTheme() {
 
       // Focus border
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorManager.primar, width: AppSize.s1_5),
+        borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
         borderRadius: const BorderRadius.all(Radius.circular(AppSize.s4)),
       ),
 
@@ -92,7 +95,8 @@ ThemeData getApplicationTheme() {
 
       //Focus border
       focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: ColorManager.primar, width: AppSize.s1_5),
+        borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
         borderRadius: const BorderRadius.all(Radius.circular(AppSize.s4)),
       ),
     ),
