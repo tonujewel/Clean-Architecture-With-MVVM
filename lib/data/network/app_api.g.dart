@@ -131,7 +131,7 @@ class _AppServiceClient implements AppServiceClient {
   @override
   Future<RestaurantDetailResultResponse> getRestaurantDetailsData(id) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'restaurant_id': id.toJson()};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -142,7 +142,7 @@ class _AppServiceClient implements AppServiceClient {
     )
             .compose(
               _dio.options,
-              'restaurant/details',
+              'restaurant/details?restaurant_id=${id}',
               queryParameters: queryParameters,
               data: _data,
             )

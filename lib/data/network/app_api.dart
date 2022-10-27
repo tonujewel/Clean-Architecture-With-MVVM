@@ -28,7 +28,6 @@ abstract class AppServiceClient {
   @GET("restaurant/list?sort_by=all&page=1&show=5&s=qu&city_id=1")
   Future<RestaurantResultResponse> getRestaurantData();
 
-  @GET("restaurant/details")
-  Future<RestaurantDetailResultResponse> getRestaurantDetailsData(
-      @Query("restaurant_id") id);
+  @GET("restaurant/details?restaurant_id={id}")
+  Future<RestaurantDetailResultResponse> getRestaurantDetailsData(@Path("id") id);
 }
