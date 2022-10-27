@@ -35,13 +35,14 @@ class RouteGenerator {
       case Routes.registerRoute:
         initRegisterModule(); // init register DI
         return MaterialPageRoute(builder: (_) => const RegisterView());
-      case Routes.forgotPasswordRoute:
+    case Routes.forgotPasswordRoute:
         initForgotModule(); // init forgot DI
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case Routes.mainRoute:
-      initHomeModule();
+        initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.storeDetailsRoute:
+        initRestaurantDetailsModule();
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
       case Routes.forgetOtpScreenRoute:
         return MaterialPageRoute(builder: (_) => const ForgetOtpScreen());

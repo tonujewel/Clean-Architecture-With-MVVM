@@ -38,6 +38,7 @@ extension AuthenticationMapper on AuthenticationResponse? {
     return Authentication(this?.userResponse?.toDomain());
   }
 }
+
 //....... Base response ...........
 
 extension BaseResponseMapper on BaseResponse? {
@@ -76,5 +77,35 @@ extension RestauranResultMapper on RestaurantResultResponse? {
     RestaurantData? restaurant = (this?.restaurantData?.toDomain());
 
     return RestaurantResult(restaurant!);
+  }
+}
+
+//........ Restaurant Details .........
+
+//....... USER ...........
+extension RestaurantDetailMapper on RestaurantDetailsResponse? {
+  RestaurantDetails toDomain() {
+    return RestaurantDetails(
+        this?.id.orEmpty() ?? ZERO,
+        this?.ownerId.orEmpty() ?? ZERO,
+        this?.categoryId.orEmpty() ?? ZERO,
+        this?.cityId.orEmpty() ?? ZERO,
+        this?.countryId.orEmpty() ?? ZERO,
+        this?.title.orEmpty() ?? EMPTY,
+        this?.address.orEmpty() ?? EMPTY,
+        this?.latitude.orEmpty() ?? EMPTY,
+        this?.longitude.orEmpty() ?? EMPTY,
+        this?.thumbnail.orEmpty() ?? EMPTY,
+        this?.avgDeliveryTime.orEmpty() ?? ZERO,
+        this?.avgSiteRating.orEmpty() ?? ZERO,
+        this?.about.orEmpty() ?? EMPTY);
+  }
+}
+
+//....... AUTHENTICATION ...........
+
+extension RestaurantDetailResultMapper on RestaurantDetailResultResponse? {
+  RestaurantDetailsResult toDomain() {
+    return RestaurantDetailsResult(this?.userResponse?.toDomain());
   }
 }

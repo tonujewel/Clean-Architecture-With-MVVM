@@ -33,7 +33,11 @@ class _HomeViewState extends State<HomeView> {
   _bind() {
     _viewModel.start();
   }
-
+@override
+  void dispose() {
+   _viewModel.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -195,14 +199,6 @@ class _HomeViewState extends State<HomeView> {
       return Container();
     }
   }
-
-  // Widget _getStores() {
-  //   return StreamBuilder<List<Restaurant>>(
-  //       stream: _viewModel.outputRestaurant,
-  //       builder: (context, snapshot) {
-  //         return _getStoresWidget(snapshot.data);
-  //       });
-  // }
 
   Widget _getStoresWidget(List<Restaurant>? stores) {
     if (stores != null) {

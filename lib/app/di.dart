@@ -18,7 +18,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/data_sources/local_data_source.dart';
+import '../domain/use_case/restaurant_detail_use_case.dart';
 import '../presentation/main/home/home_view_model.dart';
+import '../presentation/store_details/store_details_view_model.dart';
 
 final instance = GetIt.instance;
 
@@ -84,11 +86,21 @@ initRegisterModule() {
     instance.registerFactory<ImagePicker>(() => ImagePicker());
   }
 }
-
+ 
+// home modlue
 initHomeModule() {
   if (!GetIt.I.isRegistered<RestaurantUseCase>()) {
     instance.registerFactory<RestaurantUseCase>(
         () => RestaurantUseCase(instance()));
     instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
+  }
+}
+
+// Restaurant details
+initRestaurantDetailsModule() {
+  if (!GetIt.I.isRegistered<RestaurantDetailUseCase>()) {
+    instance.registerFactory<RestaurantDetailUseCase>(
+        () => RestaurantDetailUseCase(instance()));
+    instance.registerFactory<StoreDetailsViewModel>(() => StoreDetailsViewModel(instance()));
   }
 }

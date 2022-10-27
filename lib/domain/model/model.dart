@@ -1,3 +1,4 @@
+// SLIDER
 class SliderObject {
   String title;
   String subTitle;
@@ -6,6 +7,7 @@ class SliderObject {
   SliderObject(this.title, this.subTitle, this.image);
 }
 
+// USER
 class User {
   int id;
   String firstName;
@@ -36,11 +38,14 @@ class User {
   );
 }
 
+// AUTHENTICATION
 class Authentication {
   User? user;
 
   Authentication(this.user);
 }
+
+// MESSAGE
 
 class Messages {
   String message;
@@ -48,6 +53,7 @@ class Messages {
   Messages(this.message);
 }
 
+// DEVICE INFO
 class DeviceInfo {
   String name;
   String identifier;
@@ -56,6 +62,7 @@ class DeviceInfo {
   DeviceInfo(this.name, this.identifier, this.version);
 }
 
+// RESTAURANT
 class Restaurant {
   int id;
   String name;
@@ -75,4 +82,44 @@ class RestaurantResult {
   RestaurantData restaurantData;
 
   RestaurantResult(this.restaurantData);
+}
+
+// RESTAURANT DETAILS
+class RestaurantDetails {
+  int id;
+  int ownerId;
+  int categoryId;
+  int cityId;
+  int countryId;
+  String title;
+  String address;
+  String lattitude;
+  String longitude;
+  String thumbnail;
+  int averageDeliverytime;
+  int averageSiteRating;
+  String about;
+
+  RestaurantDetails(
+    this.id,
+    this.ownerId,
+    this.categoryId,
+    this.cityId,
+    this.countryId,
+    this.title,
+    this.address,
+    this.lattitude,
+    this.longitude,
+    this.thumbnail,
+    this.averageDeliverytime,
+    this.averageSiteRating,
+    this.about
+  );
+}
+
+// AUTHENTICATION
+class RestaurantDetailsResult {
+  RestaurantDetails? user;
+
+  RestaurantDetailsResult(this.user);
 }

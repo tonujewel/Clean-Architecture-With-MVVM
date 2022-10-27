@@ -113,3 +113,58 @@ Map<String, dynamic> _$RestaurantResultResponseToJson(
       'message': instance.message,
       'result': instance.restaurantData,
     };
+
+RestaurantDetailsResponse _$RestaurantDetailsResponseFromJson(
+        Map<String, dynamic> json) =>
+    RestaurantDetailsResponse(
+      json['id'] as int?,
+      json['owner_id'] as int?,
+      json['category_id'] as int?,
+      json['city_id'] as int?,
+      json['country_id'] as int?,
+      json['title'] as String?,
+      json['address'] as String?,
+      json['latitude'] as String?,
+      json['longitude'] as String?,
+      json['thumbnail'] as String?,
+      json['avg_delivery_time'] as int?,
+      json['avg_site_rating'] as int?,
+      json['about'] as String?,
+    );
+
+Map<String, dynamic> _$RestaurantDetailsResponseToJson(
+        RestaurantDetailsResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'owner_id': instance.ownerId,
+      'category_id': instance.categoryId,
+      'city_id': instance.cityId,
+      'country_id': instance.countryId,
+      'title': instance.title,
+      'address': instance.address,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+      'thumbnail': instance.thumbnail,
+      'avg_delivery_time': instance.avgDeliveryTime,
+      'avg_site_rating': instance.avgSiteRating,
+      'about': instance.about,
+    };
+
+RestaurantDetailResultResponse _$RestaurantDetailResultResponseFromJson(
+        Map<String, dynamic> json) =>
+    RestaurantDetailResultResponse(
+      json['result'] == null
+          ? null
+          : RestaurantDetailsResponse.fromJson(
+              json['result'] as Map<String, dynamic>),
+    )
+      ..success = json['success'] as bool?
+      ..message = json['message'] as String?;
+
+Map<String, dynamic> _$RestaurantDetailResultResponseToJson(
+        RestaurantDetailResultResponse instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'message': instance.message,
+      'result': instance.userResponse,
+    };

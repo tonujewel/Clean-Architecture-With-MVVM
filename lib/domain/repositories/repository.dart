@@ -9,4 +9,5 @@ abstract class Repository {
  Future<Either<Failure,Messages>> forgotPassword(ForgotRequst forgotRequst);
  Future<Either<Failure,Authentication>> register(RegisterRequest registerRequest);
  Future<Either<Failure,RestaurantResult>> getRestaurantData();
+ Future<Either<Failure,RestaurantDetailsResult>> getRestaurantDetailsData(int id);
 }
