@@ -97,7 +97,7 @@ class RestaurantResponse {
 }
 
 @JsonSerializable()
-class RestaurantDataResponse extends BaseResponse {
+class RestaurantDataResponse  {
   @JsonKey(name: 'data')
   List<RestaurantResponse>? restaurantData;
 
@@ -111,7 +111,7 @@ class RestaurantDataResponse extends BaseResponse {
       _$RestaurantDataResponseFromJson(json);
 }
 @JsonSerializable()
-class RestaurantResultResponse  {
+class RestaurantResultResponse extends BaseResponse  {
   @JsonKey(name: 'result')
   RestaurantDataResponse? restaurantData;
 

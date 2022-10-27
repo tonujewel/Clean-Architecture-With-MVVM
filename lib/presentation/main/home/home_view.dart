@@ -53,22 +53,20 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _getContentWidgets() {
-   
-    return StreamBuilder<RestaurantData>(
-      stream: _viewModel.outputRestaurant,
-      builder: (context, snapshot) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _getBanner(snapshot.data?.data),
-            _getSection(AppString.services),
-            _getServicesWidget(snapshot.data?.data),
-            _getSection(AppString.stores),
-            _getStoresWidget(snapshot.data?.data)
-          ],
-        );
-      }
-    );
+    return StreamBuilder<RestaurantResult>(
+        stream: _viewModel.outputRestaurant,
+        builder: (context, snapshot) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _getBanner(snapshot.data?.restaurantData.data),
+              _getSection(AppString.services),
+              _getServicesWidget(snapshot.data?.restaurantData.data),
+              _getSection(AppString.stores),
+              _getStoresWidget(snapshot.data?.restaurantData.data)
+            ],
+          );
+        });
   }
 
   Widget _getSection(String title) {
@@ -112,6 +110,8 @@ class _HomeViewState extends State<HomeView> {
                           placeholder: placeholderImage,
                           image: banner.image,
                           fit: BoxFit.cover,
+                          imageErrorBuilder: (context, error, stackTrace) =>
+                              Image.asset(placeholderImage),
                         ),
                       ),
                     ),
@@ -162,6 +162,12 @@ class _HomeViewState extends State<HomeView> {
                               fit: BoxFit.cover,
                               width: AppSize.s100,
                               height: AppSize.s100,
+                              imageErrorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                placeholderImage,
+                                width: AppSize.s100,
+                                height: AppSize.s100,
+                              ),
                             ),
                           ),
                           Padding(
@@ -224,6 +230,8 @@ class _HomeViewState extends State<HomeView> {
                       placeholder: placeholderImage,
                       image: stores[index].image,
                       fit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) =>
+                          Image.asset(placeholderImage),
                     ),
                   ),
                 );

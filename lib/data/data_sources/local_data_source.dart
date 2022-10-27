@@ -5,9 +5,9 @@ const CACHE_HOME_KEY = "CACHE_HOME_KEY";
 const CACHE_HOME_INTERVAL = 60 * 1000; // 1 MINUTE IN MILLIS
 
 abstract class LocalDataSource {
-  Future<RestaurantDataResponse> getRestaurantData();
+  Future<RestaurantResultResponse> getRestaurantData();
 
-  Future<void> saveRestaurantDataToCache(RestaurantDataResponse homeResponse);
+  Future<void> saveRestaurantDataToCache(RestaurantResultResponse homeResponse);
 
   void clearCache();
 
@@ -19,7 +19,7 @@ class LocalDataSourceImplementer implements LocalDataSource {
   Map<String, CachedItem> cacheMap = Map();
 
   @override
-  Future<RestaurantDataResponse> getRestaurantData() async {
+  Future<RestaurantResultResponse> getRestaurantData() async {
     CachedItem? cachedItem = cacheMap[CACHE_HOME_KEY];
 
     if (cachedItem != null && cachedItem.isValid(CACHE_HOME_INTERVAL)) {
@@ -33,7 +33,7 @@ class LocalDataSourceImplementer implements LocalDataSource {
 
   @override
   Future<void> saveRestaurantDataToCache(
-      RestaurantDataResponse homeResponse) async {
+      RestaurantResultResponse homeResponse) async {
     cacheMap[CACHE_HOME_KEY] = CachedItem(homeResponse);
   }
 

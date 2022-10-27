@@ -13,7 +13,7 @@ import '../../../domain/model/model.dart';
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInput, HomeViewModelOutput {
   // ===>> this is boradcast stream controller
-  final _restaurantStreamController = BehaviorSubject<RestaurantData>();
+  final _restaurantStreamController = BehaviorSubject<RestaurantResult>();
   // StreamController _bannersStreamController =
   //     BehaviorSubject<List<Restaurant>>();
   // StreamController _servicesStreamController =
@@ -28,6 +28,8 @@ class HomeViewModel extends BaseViewModel
   void start() {
     _getHome();
   }
+
+  
 
   _getHome() async {
     inputState.add(LoadingState(
@@ -52,7 +54,7 @@ class HomeViewModel extends BaseViewModel
   Sink get inputRestaurant => _restaurantStreamController.sink;
 
   @override
-  Stream<RestaurantData> get outputRestaurant =>
+  Stream<RestaurantResult> get outputRestaurant =>
       _restaurantStreamController.stream.map((restaurant) {
         log("stream $restaurant");
         return restaurant;
@@ -64,5 +66,5 @@ abstract class HomeViewModelInput {
 }
 
 abstract class HomeViewModelOutput {
-  Stream<RestaurantData> get outputRestaurant;
+  Stream<RestaurantResult> get outputRestaurant;
 }

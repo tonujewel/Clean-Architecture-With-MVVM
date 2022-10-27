@@ -58,14 +58,23 @@ extension RestaurantMapper on RestaurantResponse? {
   }
 }
 
-extension RestaurantDatan on RestaurantDataResponse? {
+extension RestaurantDataMapper on RestaurantDataResponse? {
   RestaurantData toDomain() {
-
-     List<Restaurant> restaurant = 
-       (this?.restaurantData?.map((service) => service.toDomain()) ??
+    List<Restaurant> restaurant =
+        (this?.restaurantData?.map((service) => service.toDomain()) ??
                 const Iterable.empty())
             .cast<Restaurant>()
             .toList();
     return RestaurantData(restaurant);
+  }
+}
+
+extension RestauranResultMapper on RestaurantResultResponse? {
+  RestaurantResult toDomain() {
+    //   RestaurantData restaurantDatam= this?.restaurantData.toDomain()??RestaurantData([]);
+
+    RestaurantData? restaurant = (this?.restaurantData?.toDomain());
+
+    return RestaurantResult(restaurant!);
   }
 }

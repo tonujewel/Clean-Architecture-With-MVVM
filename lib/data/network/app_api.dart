@@ -25,6 +25,6 @@ abstract class AppServiceClient {
     @Field("password") String password,
   );
 
-  @GET("product/list")
-  Future<RestaurantDataResponse> getRestaurantData();
+  @GET("restaurant/list?sort_by=all&page=1&show=5&s=qu&city_id=1")
+  Future<RestaurantResultResponse> getRestaurantData();
 }

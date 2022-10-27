@@ -10,8 +10,8 @@ class StoreDetailsView extends StatefulWidget {
 class _StoreDetailsViewState extends State<StoreDetailsView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Text("Store Details"),
+    return const Scaffold(
+      body: Center(child: Text("Store Details")),
     );
   }
 }

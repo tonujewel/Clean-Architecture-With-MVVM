@@ -70,3 +70,9 @@ class RestaurantData {
 
   RestaurantData(this.data);
 }
+
+class RestaurantResult {
+  RestaurantData restaurantData;
+
+  RestaurantResult(this.restaurantData);
+}

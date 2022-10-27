@@ -106,25 +106,25 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
-  Future<RestaurantDataResponse> getRestaurantData() async {
+  Future<RestaurantResultResponse> getRestaurantData() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<RestaurantDataResponse>(Options(
+        _setStreamType<RestaurantResultResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'product/list',
+              'restaurant/list?sort_by=all&page=1&show=5&s=qu&city_id=1',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = RestaurantDataResponse.fromJson(_result.data!);
+    final value = RestaurantResultResponse.fromJson(_result.data!);
     return value;
   }
 

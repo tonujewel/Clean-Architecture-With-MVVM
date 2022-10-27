@@ -141,7 +141,7 @@ class RepositoryImpl extends Repository {
 
   //.....
   @override
-  Future<Either<Failure, RestaurantData>> getRestaurantData() async {
+  Future<Either<Failure, RestaurantResult>> getRestaurantData() async {
     try {
       // get from cache
       log("message try");
