@@ -22,7 +22,7 @@
   "invalid_user_name": "Invalid User Name",
   "invalid_mobile_number": "Invalid Mobile Number",
   "invalid_email": "Invalid Email",
-  "register": "Register",
+  "register": "Registration",
   "already_have_account": "Already have an account? login",
   "upload_profile_pictuSearchre": "profile picture",
   "photo_gallery": "Photo from gallery",
@@ -55,5 +55,9 @@
   "contact_us": "Contact Us",
   "invite_your_friends": "Invite Your Friends",
   "logout": "Logout",
-  "reset_password": "Reset Password"
+  "reset_password": "Reset Password",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "send_verification_code":"Send verification code",
+  "profile_picture":"Profile picture"
 }

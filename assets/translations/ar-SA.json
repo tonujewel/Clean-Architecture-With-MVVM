@@ -54,6 +54,10 @@
   "contact_us": "اتصل بنا",
   "invite_your_friends": "قم بدعوة أصدقائك",
   "logout": "تسجيل الخروج",
-  "reset_password": "اعاده تعيين كلمه السر"
+  "reset_password": "اعاده تعيين كلمه السر",
+  "first_name": "الاسم الاول",
+  "last_name": "الكنية",
+  "send_verification_code":"إرسال رمز التحقق",
+  "profile_picture":"الصوره الشخصيه"
 
 }

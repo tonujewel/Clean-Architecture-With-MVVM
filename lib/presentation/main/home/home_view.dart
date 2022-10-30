@@ -6,6 +6,7 @@ import 'package:clean_architecture_with_mvvm/presentation/common/state_renderer/
 import 'package:clean_architecture_with_mvvm/presentation/resources/asset_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/string_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../app/di.dart';
 import '../../resources/color_manager.dart';
@@ -66,9 +67,9 @@ class _HomeViewState extends State<HomeView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _getBanner(snapshot.data?.restaurantData.data),
-              _getSection(AppString.services),
+              _getSection(AppString.services.tr()),
               _getServicesWidget(snapshot.data?.restaurantData.data),
-              _getSection(AppString.stores),
+              _getSection(AppString.stores.tr()),
               _getStoresWidget(snapshot.data?.restaurantData.data)
             ],
           );
@@ -88,15 +89,6 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
-
-  // Widget _getBannersCarousel() {
-  //   return StreamBuilder<List<Restaurant>>(
-  //       stream: _viewModel.outputRestaurant,
-  //       builder: (context, snapshot) {
-  //         log("home : ${snapshot.data?.length}");
-  //         return _getBanner(snapshot.data);
-  //       });
-  // }
 
   Widget _getBanner(List<Restaurant>? banners) {
     if (banners != null) {

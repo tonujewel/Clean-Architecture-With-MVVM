@@ -1,5 +1,6 @@
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/forgot_password/forgot_password_view_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../common/state_renderer/state_render_impl.dart';
@@ -81,11 +82,11 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                         keyboardType: TextInputType.emailAddress,
                         controller: _emailTextController,
                         decoration: InputDecoration(
-                          hintText: AppString.email,
-                          labelText: AppString.email,
+                          hintText: AppString.email.tr(),
+                          labelText: AppString.email.tr(),
                           errorText: (snapshot.data ?? true)
                               ? null
-                              : AppString.emailError,
+                              : AppString.emailError.tr(),
                         ),
                       );
                     }),
@@ -106,40 +107,11 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                   _viewModel.forgotPassword();
                                 }
                               : null,
-                          child: const Text(AppString.sendVarificationCode)),
+                          child: Text(AppString.sendVarificationCode.tr())),
                     );
                   },
                 ),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.only(
-              //       left: AppPadding.p28,
-              //       right: AppPadding.p28,
-              //       top: AppPadding.p8),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       TextButton(
-              //           onPressed: () {
-              //             Navigator.pushReplacementNamed(
-              //                 context, Routes.forgotPasswordRoute);
-              //           },
-              //           child: Text(
-              //             AppString.forgotPassword,
-              //             style: Theme.of(context).textTheme.subtitle2,
-              //           )),
-              //       TextButton(
-              //           onPressed: () {
-              //             Navigator.pushReplacementNamed(
-              //                 context, Routes.registerRoute);
-              //           },
-              //           child: Text(
-              //             AppString.registerText,
-              //             style: Theme.of(context).textTheme.subtitle2,
-              //           )),
-              //     ],
-              //   ),
-              // )
             ],
           ),
         ),

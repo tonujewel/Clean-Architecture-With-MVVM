@@ -5,6 +5,7 @@ import 'package:clean_architecture_with_mvvm/presentation/main/setting_view.dart
 import 'package:clean_architecture_with_mvvm/presentation/resources/color_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/string_manager.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -23,13 +24,13 @@ class _MainViewState extends State<MainView> {
   ];
 
   List<String> titleList = [
-    AppString.home,
-    AppString.search,
-    AppString.notification,
-    AppString.settings,
+    AppString.home.tr(),
+    AppString.search.tr(),
+    AppString.notification.tr(),
+    AppString.settings.tr(),
   ];
 
-  var _title = AppString.home;
+  var _title = AppString.home.tr();
   var _currentIndex = 0;
 
   @override

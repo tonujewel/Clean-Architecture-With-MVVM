@@ -3,6 +3,7 @@ import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/register/register_view_model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/resources/route_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
@@ -127,8 +128,8 @@ class _RegisterViewState extends State<RegisterView> {
                         keyboardType: TextInputType.emailAddress,
                         controller: _firstNameTextEditingController,
                         decoration: InputDecoration(
-                          hintText: AppString.firstName,
-                          labelText: AppString.firstName,
+                          hintText: AppString.firstName.tr(),
+                          labelText: AppString.firstName.tr(),
                           errorText: snapshot.data,
                         ),
                       );
@@ -146,8 +147,8 @@ class _RegisterViewState extends State<RegisterView> {
                       return TextFormField(
                         controller: _lastNameTextEditingController,
                         decoration: InputDecoration(
-                          hintText: AppString.lastName,
-                          labelText: AppString.lastName,
+                          hintText: AppString.lastName.tr(),
+                          labelText: AppString.lastName.tr(),
                           errorText: snapshot.data,
                         ),
                       );
@@ -164,8 +165,8 @@ class _RegisterViewState extends State<RegisterView> {
                       return TextFormField(
                         controller: _emailTextEditingController,
                         decoration: InputDecoration(
-                          hintText: AppString.email,
-                          labelText: AppString.email,
+                          hintText: AppString.email.tr(),
+                          labelText: AppString.email.tr(),
                           errorText: snapshot.data,
                         ),
                       );
@@ -183,8 +184,8 @@ class _RegisterViewState extends State<RegisterView> {
                         obscureText: true,
                         controller: _passwordTextEditingController,
                         decoration: InputDecoration(
-                          hintText: AppString.password,
-                          labelText: AppString.password,
+                          hintText: AppString.password.tr(),
+                          labelText: AppString.password.tr(),
                           errorText: snapshot.data,
                         ),
                       );
@@ -226,7 +227,7 @@ class _RegisterViewState extends State<RegisterView> {
                                     _viewModel.register();
                                   }
                                 : null,
-                            child: const Text(AppString.registration)),
+                            child: Text(AppString.registration.tr())),
                       );
                     },
                   )),
@@ -242,7 +243,7 @@ class _RegisterViewState extends State<RegisterView> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      AppString.alreadyHaveAccount,
+                      AppString.alreadyHaveAccount.tr(),
                       style: Theme.of(context).textTheme.subtitle2,
                     )),
               )
@@ -263,7 +264,7 @@ class _RegisterViewState extends State<RegisterView> {
               ListTile(
                 trailing: const Icon(Icons.arrow_forward),
                 leading: const Icon(Icons.camera),
-                title: const Text(AppString.photoFromGallery),
+                title: Text(AppString.photoFromGallery.tr()),
                 onTap: () {
                   _imageFromGallery();
                   Navigator.of(context).pop();
@@ -272,10 +273,8 @@ class _RegisterViewState extends State<RegisterView> {
               ListTile(
                 trailing: const Icon(Icons.arrow_forward),
                 leading: const Icon(Icons.camera_alt_rounded),
-                title: const Text(AppString.photoFromCamera),
+                title: Text(AppString.photoFromCamera.tr()),
                 onTap: () {
-                  // Navigator.pop(context);
-                  // Navigator.of(context).pop();
                   _imageFromCamera();
                   Navigator.of(context).pop();
                 },
@@ -302,10 +301,10 @@ class _RegisterViewState extends State<RegisterView> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Flexible(
+           Flexible(
               child: Text(
-            AppString.profilePicture,
-            style: TextStyle(fontSize: 12),
+            AppString.profilePicture.tr(),
+            style: const TextStyle(fontSize: 12),
           )),
           StreamBuilder<File?>(
               stream: _viewModel.outputProfilePicture,
