@@ -19,7 +19,7 @@ class LoginViewModel extends BaseViewModel
       StreamController<void>.broadcast();
 
   StreamController isLoginSuccessfullyStreamController =
-      StreamController<bool>();
+      StreamController<String>();
 
   var loginObject = LoginObject("", "");
 
@@ -65,7 +65,7 @@ class LoginViewModel extends BaseViewModel
       log("failure $data");
       // right -> success (data)
       inputState.add(ContentState());
-      isLoginSuccessfullyStreamController.add(true);
+      isLoginSuccessfullyStreamController.add(data.user?.token);
     });
   }
 

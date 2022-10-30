@@ -36,10 +36,11 @@ class _LoginViewState extends State<LoginView> {
     _passwordTextController.addListener(
         () => _viewModel.setPassword(_passwordTextController.text));
 
-    _viewModel.isLoginSuccessfullyStreamController.stream
-        .listen((isLoginSuccess) {
+    _viewModel.isLoginSuccessfullyStreamController.stream.listen((token) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _appPreferences.setToken(token);
         _appPreferences.setIsUserLoggedIn();
+        resetModules();
         Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
       });
     });
@@ -141,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
                                   _viewModel.login();
                                 }
                               : null,
-                          child:  Text(AppString.login.tr())),
+                          child: Text(AppString.login.tr())),
                     );
                   },
                 ),

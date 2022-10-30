@@ -16,7 +16,6 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/data_sources/local_data_source.dart';
 import '../domain/use_case/restaurant_detail_use_case.dart';
 import '../presentation/main/home/home_view_model.dart';
@@ -104,3 +103,14 @@ initRestaurantDetailsModule() {
     instance.registerFactory<StoreDetailsViewModel>(() => StoreDetailsViewModel(instance()));
   }
 }
+
+resetModules() {
+  instance.reset(dispose: false);
+  initAppModule();
+  initHomeModule();
+  initLoginModule();
+  initRegisterModule();
+  initForgotModule();
+  initRestaurantDetailsModule();
+}
+
