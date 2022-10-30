@@ -1,3 +1,4 @@
+
 import 'package:clean_architecture_with_mvvm/app/di.dart';
 import 'package:clean_architecture_with_mvvm/presentation/forgot_password/forgot_password_view.dart';
 import 'package:clean_architecture_with_mvvm/presentation/login/login_view.dart';
@@ -24,6 +25,9 @@ class Routes {
 
 class RouteGenerator {
   static Route<dynamic> getRoute(RouteSettings routeSettings) {
+    final arguments = routeSettings.arguments;
+
+ 
     switch (routeSettings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
@@ -35,7 +39,7 @@ class RouteGenerator {
       case Routes.registerRoute:
         initRegisterModule(); // init register DI
         return MaterialPageRoute(builder: (_) => const RegisterView());
-    case Routes.forgotPasswordRoute:
+      case Routes.forgotPasswordRoute:
         initForgotModule(); // init forgot DI
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case Routes.mainRoute:
@@ -43,7 +47,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.storeDetailsRoute:
         initRestaurantDetailsModule();
-        return MaterialPageRoute(builder: (_) => const StoreDetailsView());
+        return MaterialPageRoute(
+            builder: (_) => StoreDetailsView(
+                  id: arguments.toString(),
+                ));
       case Routes.forgetOtpScreenRoute:
         return MaterialPageRoute(builder: (_) => const ForgetOtpScreen());
       default:

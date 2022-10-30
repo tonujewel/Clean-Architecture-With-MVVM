@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:clean_architecture_with_mvvm/app/app_prefs.dart';
 import 'package:clean_architecture_with_mvvm/app/constant.dart';
 import 'package:dio/dio.dart';

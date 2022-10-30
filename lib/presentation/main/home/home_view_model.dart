@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:clean_architecture_with_mvvm/domain/use_case/restaurant_usecase.dart';
@@ -56,7 +55,7 @@ class HomeViewModel extends BaseViewModel
   @override
   Stream<RestaurantResult> get outputRestaurant =>
       _restaurantStreamController.stream.map((restaurant) {
-        log("stream $restaurant");
+     
         return restaurant;
       });
 }

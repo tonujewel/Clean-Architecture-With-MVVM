@@ -1,3 +1,4 @@
+
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:clean_architecture_with_mvvm/presentation/store_details/store_details_view_model.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import '../../app/di.dart';
 import '../common/state_renderer/state_render_impl.dart';
 
 class StoreDetailsView extends StatefulWidget {
-  const StoreDetailsView({Key? key}) : super(key: key);
+  const StoreDetailsView({Key? key, required this.id}) : super(key: key);
+
+  final String id;
 
   @override
   State<StoreDetailsView> createState() => _StoreDetailsViewState();
@@ -21,12 +24,13 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
   }
 
   _bind() {
+    _viewModel.getId(int.parse(widget.id));
     _viewModel.start();
   }
 
   @override
   void dispose() {
-    // _viewModel.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
 
@@ -58,9 +62,9 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
         stream: _viewModel.outputRestaurantDetails,
         builder: (context, snapshot) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // shrinkWrap: true,
             children: [
-              // Text("${snapshot.data?.result?.id}"),
+              Text("${snapshot.data?.restaurant?.address}"),
             ],
           );
         });

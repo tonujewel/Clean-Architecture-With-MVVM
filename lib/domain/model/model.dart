@@ -117,9 +117,9 @@ class RestaurantDetails {
   );
 }
 
-// AUTHENTICATION
+// Restaurant Details
 class RestaurantDetailsResult {
-  RestaurantDetails? user;
+  RestaurantDetails? restaurant;
 
-  RestaurantDetailsResult(this.user);
+  RestaurantDetailsResult(this.restaurant);
 }

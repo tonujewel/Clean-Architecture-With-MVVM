@@ -10,7 +10,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await initAppModule();
   runApp(EasyLocalization(
-    supportedLocales: [ENGLISH_LOCALE, ARABIK_LOCALE],
+    supportedLocales: const [ENGLISH_LOCALE, ARABIK_LOCALE],
     path: ASSET_PATH_LOCALE,
     child: Phoenix(child: MyApp()),
   ));

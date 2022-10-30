@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
 import 'package:clean_architecture_with_mvvm/domain/use_case/restaurant_detail_use_case.dart';
@@ -18,17 +17,23 @@ class StoreDetailsViewModel extends BaseViewModel
 
   StoreDetailsViewModel(this._restaurantDetailUseCase);
 
+  late int idData;
+
   @override
   void start() {
     _getRestaurant();
+  }
+
+  @override
+  void getId(int id) {
+    idData = id;
   }
 
   _getRestaurant() async {
     inputState.add(LoadingState(
         stateRendererType: StateRendererType.FULL_SCREEN_LOADING_STATE));
 
-    // TODO: need id to send
-    (await _restaurantDetailUseCase.execute(1)).fold((failure) {
+    (await _restaurantDetailUseCase.execute(idData)).fold((failure) {
       inputState.add(ErrorState(
           StateRendererType.FULL_SCREEN_ERROR_STATE, failure.message));
     }, (homeObject) {
@@ -54,6 +59,8 @@ class StoreDetailsViewModel extends BaseViewModel
 
 abstract class StoreDetailsViewModelInput {
   Sink get inputRestaurantDetails;
+
+  getId(int id);
 }
 
 abstract class StoreDetailsViewModelOutput {

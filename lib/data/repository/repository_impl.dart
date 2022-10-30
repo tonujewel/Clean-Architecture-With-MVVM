@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:clean_architecture_with_mvvm/data/data_sources/local_data_source.dart';
 import 'package:clean_architecture_with_mvvm/data/data_sources/remote_data_sources.dart';
@@ -109,11 +108,11 @@ class RepositoryImpl extends Repository {
   Future<Either<Failure, RestaurantResult>> getRestaurantData() async {
     try {
       // get from cache
-      log("message try");
+
       final response = await _localDataSource.getRestaurantData();
       return Right(response.toDomain());
     } catch (cacheError) {
-      log("message cache");
+
       // we have cache error so we should call API
 
       if (await _networkInfo.isConnected) {
@@ -149,10 +148,10 @@ class RepositoryImpl extends Repository {
       int id) async {
     if (await _networkInfo.isConnected) {
       try {
-        log("try 1");
+
         // internet connection is okay
         final response = await _remoteDataSource.getRestaurantDetailData(id);
-        log("try 2");
+   
         if (response.success == ApiInternalStatus.SUCCESS) {
           // success
           // then return right
@@ -164,7 +163,7 @@ class RepositoryImpl extends Repository {
               Failure(409, response.message ?? ResponseMessage.DEFAULT));
         }
       } catch (error) {
-        log("error$error");
+       
         // Error handle
         return Left(ErrorHandler.handle(error).failure);
       }

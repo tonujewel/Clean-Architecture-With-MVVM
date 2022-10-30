@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clean_architecture_with_mvvm/domain/model/model.dart';
@@ -212,7 +211,8 @@ class _HomeViewState extends State<HomeView> {
                 return InkWell(
                   onTap: () {
                     // navigate to store details screen
-                    Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
+                    Navigator.of(context).pushNamed(Routes.storeDetailsRoute,
+                        arguments: stores[index].id);
                   },
                   child: Card(
                     elevation: AppSize.s4,
