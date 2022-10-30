@@ -58,4 +58,10 @@ class AppString {
 
   static const String services = "Services";
   static const String stores = "Stores";
+
+  //.............. SETTINGS SCREEN ...............//
+  static const String changeLanguage = "Change Language";
+  static const String contactUs = "Contact Us";
+  static const String inviteYourFriend = "Invite Friend";
+  static const String logout = "Logout";
 }

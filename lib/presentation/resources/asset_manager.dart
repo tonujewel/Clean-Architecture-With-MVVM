@@ -2,15 +2,15 @@ const String imagePath = "assets/images";
 
 class AssetManager {
   // common
-  static const String holloCircleIc = "$imagePath/hollow_cirlce_ic.svg";
-  static const String leftArroIc = "$imagePath/left_arrow_ic.svg";
-  static const String rightArrowIc = "$imagePath/right_arrow_ic.svg";
+  static const String holloCircleIcIcon = "$imagePath/hollow_cirlce_ic.svg";
+  static const String leftArroIcIcon = "$imagePath/left_arrow_ic.svg";
+  static const String rightArrowIcIcon = "$imagePath/right_arrow_ic.svg";
   static const String solidCircleIc = "$imagePath/solid_circle_ic.svg";
-  static const String imagePreview = "$imagePath/image_preview.png";
-  static const String placeholder = "$imagePath/placeholder.gif";
+  static const String imagePreviewIcon = "$imagePath/image_preview.png";
+  static const String placeholderGif = "$imagePath/placeholder.gif";
 
   // splash
-  static const String splashLogo = "$imagePath/splash_logo.png";
+  static const String splashLogoPng = "$imagePath/splash_logo.png";
   // on boarding
   static const String onBoardingLogo1 = "$imagePath/onboarding_logo1.svg";
   static const String onBoardingLogo2 = "$imagePath/onboarding_logo2.svg";
@@ -19,6 +19,14 @@ class AssetManager {
 
   // sign up
   static const String cameraIcon = "$imagePath/photo_camera_ic.svg";
+
+  // settings
+  static const String settingRightArrowIcon =
+      "$imagePath/settings_right_arrow_ic.svg";
+  static const String changeLanguageIcon = "$imagePath/change_lang_ic.svg";
+  static const String contactUsIcon = "$imagePath/contact_us_ic.svg";
+  static const String inviteFriendIcon = "$imagePath/invite_friends_ic.svg";
+  static const String logoutIcon = "$imagePath/logout_ic.svg";
 }
 
 class JsonManager {

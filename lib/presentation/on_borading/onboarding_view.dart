@@ -121,7 +121,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: SizedBox(
                 height: AppSize.s20,
                 width: AppSize.s20,
-                child: SvgPicture.asset(AssetManager.leftArroIc),
+                child: SvgPicture.asset(AssetManager.leftArroIcIcon),
               ),
             ),
           ),
@@ -152,7 +152,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: SizedBox(
                 height: AppSize.s20,
                 width: AppSize.s20,
-                child: SvgPicture.asset(AssetManager.rightArrowIc),
+                child: SvgPicture.asset(AssetManager.rightArrowIcIcon),
               ),
             ),
           ),
@@ -163,7 +163,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Widget _getProperCircle(int index, currentIndex) {
     if (index == currentIndex) {
-      return SvgPicture.asset(AssetManager.holloCircleIc); // selected slider
+      return SvgPicture.asset(
+          AssetManager.holloCircleIcIcon); // selected slider
     } else {
       return SvgPicture.asset(AssetManager.solidCircleIc); // selected slider
 

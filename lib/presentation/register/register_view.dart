@@ -113,7 +113,7 @@ class _RegisterViewState extends State<RegisterView> {
           key: _formKey,
           child: Column(
             children: [
-              Image.asset(AssetManager.splashLogo),
+              Image.asset(AssetManager.splashLogoPng),
               const SizedBox(height: AppPadding.p28),
 
               // first Name

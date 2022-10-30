@@ -18,7 +18,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewModel _viewModel = instance<LoginViewModel>(); // Dependency Injection
+  final LoginViewModel _viewModel =
+      instance<LoginViewModel>(); // Dependency Injection
 
   final AppPreferences _appPreferences = instance<AppPreferences>();
 
@@ -73,7 +74,6 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _getContectWidget() {
-    
     return Container(
       padding: const EdgeInsets.only(
         top: AppPadding.p100,
@@ -83,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
           key: _formKey,
           child: Column(
             children: [
-              Image.asset(AssetManager.splashLogo),
+              Image.asset(AssetManager.splashLogoPng),
               const SizedBox(height: AppPadding.p28),
               Padding(
                 padding: const EdgeInsets.only(
@@ -164,8 +164,7 @@ class _LoginViewState extends State<LoginView> {
                         )),
                     TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(
-                              context, Routes.registerRoute);
+                          Navigator.pushNamed(context, Routes.registerRoute);
                         },
                         child: Text(
                           AppString.registerText,

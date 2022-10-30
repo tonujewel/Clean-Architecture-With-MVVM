@@ -69,7 +69,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         child: Form(
           child: Column(
             children: [
-              Image.asset(AssetManager.splashLogo),
+              Image.asset(AssetManager.splashLogoPng),
               const SizedBox(height: AppPadding.p28),
               Padding(
                 padding: const EdgeInsets.only(

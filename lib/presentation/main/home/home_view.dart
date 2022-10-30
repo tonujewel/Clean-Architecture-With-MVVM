@@ -22,7 +22,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final HomeViewModel _viewModel = instance<HomeViewModel>();
 
-  final placeholderImage = AssetManager.placeholder;
+  final placeholderImage = AssetManager.placeholderGif;
 
   @override
   void initState() {
@@ -33,11 +33,13 @@ class _HomeViewState extends State<HomeView> {
   _bind() {
     _viewModel.start();
   }
-@override
+
+  @override
   void dispose() {
-   _viewModel.dispose();
+    _viewModel.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Center(
